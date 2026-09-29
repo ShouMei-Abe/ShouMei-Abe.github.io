@@ -1,0 +1,1407 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yi Zhuang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400&family=Special+Elite&family=Nothing+You+Could+Do&family=LXGW+WenKai+TC:wght@300&display=swap">
+<style>
+/* Layout: a torn strip of paper pinned down the left as the index; the pink ground is the page; stationery (letter paper, cotton, vellum, tags) slides over itself as you scroll; the branch is drawn in bleeding pen */
+:root {
+  --ground: #F2DAD0;
+  --shell: #F7E5DD;
+  --blush: #EDCABD;
+  --rose: #E3B6A6;
+  --cotton: #F5E3D9;
+  --ivory: #FBF4EC;
+  --fiber: #FFFAF6;
+  --ink: #55362A;
+  --ink-soft: #876356;
+  --line: rgba(160,108,92,.20);
+  --margin-line: rgba(196,112,100,.32);
+  --side-w: 232px;
+  --gut-r: clamp(16px, 4vw, 56px);
+  --script: "Mrs Saint Delafield", "Snell Roundhand", "Apple Chancery", cursive;
+  --serif: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+  --body: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='190' height='190'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .27  0 0 0 0 .22  0 0 0 .13 -.02'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  --hairs: none; --mottle: none; --fiber-tex: none;
+  --tooth: none; --tooth-fine: none; --laid: none;
+  --paper-tex: var(--tooth), var(--hairs), var(--grain), var(--fiber-tex), var(--mottle);
+  --paper-size: 300px 300px, 520px 520px, 190px 190px, 300px 300px, 1180px 1180px;
+  color-scheme: light;
+}
+html { background: var(--ground); }
+body { background-color: var(--ground); background-image: var(--tooth-fine), var(--hairs), var(--grain), var(--fiber-tex), var(--mottle); background-size: 240px 240px, 520px 520px, 190px 190px, 300px 300px, 1180px 1180px; color: var(--ink); font-family: var(--body); font-weight: 300; line-height: 1.9; margin: 0; padding-inline: 0; padding-block: 0; overflow-x: clip; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 1px dashed var(--ink-soft); outline-offset: 4px; }
+
+/* paper */
+.scrap { position: relative; filter: drop-shadow(0 0 .5px rgba(80,50,40,.3)) drop-shadow(3px 5px 6px rgba(80,50,40,.12)); }
+/* materials: each paper keeps its own surface */
+.m-writing { --mat-tex: var(--grain), var(--fiber-tex); --mat-size: 190px 190px, 300px 300px; --mat-op: .75; --core-tex: var(--grain); }
+.m-card { --mat-tex: var(--tooth-fine), var(--grain); --mat-size: 240px 240px, 190px 190px; --mat-op: .8; --core-tex: var(--grain); }
+.m-cotton { --mat-tex: var(--tooth), var(--hairs), var(--grain), var(--fiber-tex); --mat-size: 300px 300px, 520px 520px, 190px 190px, 300px 300px; --mat-op: 1; --core-tex: var(--tooth), var(--hairs); }
+.m-laid { --mat-tex: var(--laid), var(--tooth-fine), var(--hairs), var(--grain); --mat-size: 320px 320px, 240px 240px, 520px 520px, 190px 190px; --mat-op: 1; --core-tex: var(--hairs), var(--grain); }
+.scrap > .edge, .scrap > .face { position: absolute; inset: 0; pointer-events: none; }
+.scrap > .edge { background-color: var(--fiber); background-image: var(--core-tex, var(--grain)); background-size: 150px 150px, 520px 520px; }
+.scrap > canvas.paperfx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.scrap > .face { background-color: var(--tone, var(--blush)); }
+.scrap > .face::after { content: ""; position: absolute; inset: 0; background-image: var(--mat-tex, var(--paper-tex)); background-size: var(--mat-size, var(--paper-size)); background-position: var(--bx, 0) var(--by, 0); opacity: var(--mat-op, 1); }
+.scrap > :where(:not(.edge, .face)) { position: relative; }
+.t-shell { --tone: var(--shell); } .t-blush { --tone: var(--blush); } .t-rose { --tone: var(--rose); } .t-cotton { --tone: var(--cotton); } .t-ivory { --tone: var(--ivory); }
+.lined > .face { background-image: linear-gradient(90deg, transparent 54px, var(--margin-line) 54px 55px, transparent 55px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); background-position: 0 0, 0 14px; }
+.lined { line-height: 32px; }
+.vellum { filter: none; }
+.vellum > .face { background: rgba(253,246,241,.5); backdrop-filter: blur(2.5px) saturate(1.05); -webkit-backdrop-filter: blur(2.5px); }
+.vellum > .face::after { opacity: .45; }
+.vellum > .edge { background: rgba(255,255,255,.34); }
+.tag { padding: 30px 26px 30px 56px !important; }
+.tag::before { content: ""; position: absolute; left: 20px; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: var(--ground); box-shadow: inset 0 1px 2px rgba(85,54,42,.3), 0 0 0 3px rgba(255,250,246,.7); z-index: 2; }
+
+/* reveal + parallax */
+.js .reveal { opacity: 0; transform: translateY(44px) rotate(var(--r, 0deg)) scale(.985); transition: opacity 1.2s ease, transform 1.5s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.in { opacity: 1; transform: translateY(0) rotate(var(--r, 0deg)); }
+.reveal { transform: rotate(var(--r, 0deg)); }
+.para { will-change: transform; }
+
+/* ink lives on the paper it was drawn on */
+.scrap > canvas.ink { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: multiply; }
+.scrap > svg.fringe { position: absolute; left: -8px; top: -8px; pointer-events: none; overflow: visible; }
+.side-paper > svg.fringe { display: none; }
+.ground-ink { position: absolute; left: 0; pointer-events: none; mix-blend-mode: multiply; z-index: 0; }
+.botanic { position: absolute; pointer-events: none; mix-blend-mode: multiply; z-index: 0; }
+.scrap > canvas.botanic { position: absolute; }
+
+/* sidebar */
+.side { position: fixed; left: 0; top: 0; bottom: 0; width: calc(var(--side-w) + 22px); z-index: 40; pointer-events: none; }
+.side-paper { position: absolute; inset: 0; pointer-events: auto; padding: calc(40px + env(safe-area-inset-top, 0px)) 44px 32px 30px; display: flex; flex-direction: column; overflow-y: auto; }
+.side-name { font-family: var(--script); font-size: 56px; line-height: 1; text-decoration: none; color: var(--ink); display: block; margin-bottom: 2px; }
+.side-zh { font-size: 13px; letter-spacing: .32em; color: var(--ink-soft); margin: 0 0 36px 4px; }
+.side nav { display: grid; gap: 2px; }
+.side nav > a { text-decoration: none; font-family: var(--serif); font-size: 21px; display: flex; align-items: baseline; gap: 10px; padding-block: 3px; transition: color .4s ease, transform .4s ease; }
+.side nav > a span { font-family: var(--body); font-size: 12px; letter-spacing: .2em; color: var(--ink-soft); }
+.side nav > a:hover { transform: translateX(3px); }
+.side nav > a.on { font-style: italic; }
+.side nav > a.on::before { content: ""; width: 14px; height: 1px; background: var(--ink); align-self: center; margin-right: -2px; }
+.side-works { list-style: none; margin: 2px 0 12px 14px; padding: 0 0 0 12px; border-left: 1px solid var(--line); display: grid; gap: 1px; }
+.side-works a { text-decoration: none; font-size: 13.5px; color: var(--ink-soft); transition: color .3s ease; }
+.side-works a:hover { color: var(--ink); }
+.side-works .yr { font-family: var(--serif); font-style: italic; font-size: 13px; margin-left: 6px; opacity: .8; }
+.side-foot { margin-top: auto; padding-top: 28px; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+.side-foot .mail { font-style: normal; user-select: all; word-break: break-all; }
+
+.topbar { display: none; }
+.menu-btn { font: inherit; font-family: var(--serif); font-style: italic; font-size: 18px; background: none; border: 0; color: var(--ink); padding: 6px 4px; cursor: pointer; }
+
+/* main */
+main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28px, 5vw, 80px) var(--gut-r); padding-block: 0 0; min-height: 100vh; }
+.view { position: relative; z-index: 1; }
+.col { max-width: 900px; }
+.bleed-r { margin-right: calc(-1 * var(--gut-r)); }
+
+
+.label { font-family: var(--script); font-weight: 400; font-size: clamp(72px, 10vw, 128px); line-height: .9; margin: 0; color: var(--ink); }
+.label-note { font-family: var(--serif); font-style: italic; color: var(--ink-soft); margin: 4px 0 56px .3em; font-size: 17px; }
+
+/* home */
+.hero { position: relative; min-height: min(88vh, 820px); display: grid; align-content: center; padding-block: 72px 40px; }
+.name { font-family: var(--script); font-weight: 400; font-size: clamp(96px, 15vw, 220px); line-height: .9; color: var(--fiber); -webkit-text-stroke: .7px rgba(85,54,42,.4); margin: 0; position: relative; z-index: 2; clip-path: inset(-20% 100% -20% 0); animation: write 3.4s cubic-bezier(.55,.1,.3,1) .4s forwards; }
+@keyframes write { to { clip-path: inset(-20% -10% -20% 0); } }
+.sub { position: relative; z-index: 2; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.3vw, 24px); color: var(--ink-soft); margin: 20px 0 0 .5em; opacity: 0; animation: rise 1.6s ease 2.8s forwards; }
+.statement { position: relative; z-index: 2; max-width: 30em; margin: 34px 0 0 .6em; font-size: 16px; opacity: 0; animation: rise 1.6s ease 3.3s forwards; }
+.statement p { margin: 0 0 .6em; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.cue { position: absolute; left: .6em; bottom: 10px; font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 15px; opacity: 0; animation: rise 1.6s ease 4s forwards; }
+
+.stack { position: relative; padding-bottom: 40px; }
+.card { position: sticky; margin-bottom: 44vh; }
+.card:last-child { margin-bottom: 0; }
+.card:nth-child(1) { top: 9vh; z-index: 1; }
+.card:nth-child(2) { top: 13vh; z-index: 2; }
+.card:nth-child(3) { top: 17vh; z-index: 3; }
+.letter { max-width: 620px; padding: 46px 40px 46px 78px; --r: -1.2deg; }
+.letter .greet { font-family: var(--script); font-size: 52px; line-height: 64px; margin: 0; }
+.letter p { margin: 0; font-size: 15.5px; }
+.letter .sign { font-family: var(--script); font-size: 40px; text-align: right; margin-top: 16px; line-height: 48px; }
+.selected { margin-left: clamp(0px, 12vw, 180px); padding: 40px clamp(24px, 4vw, 48px) 44px; --r: 1.4deg; }
+.selected h3, .now h3 { font-family: var(--serif); font-weight: 500; font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 18px; }
+.sel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 28px; }
+.sel-grid a { text-decoration: none; display: grid; gap: 8px; }
+.sel-grid a:hover .mini { transform: rotate(-1.5deg) translateY(-3px); }
+.mini { aspect-ratio: 5 / 3; max-width: 100%; display: grid; place-items: center; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.mini svg { width: 56%; position: relative; }
+.sel-grid b { font-weight: 400; font-size: 17px; letter-spacing: .04em; }
+.sel-grid i { font-family: var(--serif); color: var(--ink-soft); font-size: 15px; margin-top: -6px; }
+.more { display: inline-block; margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 18px; text-decoration: none; border-bottom: 1px solid var(--line); }
+.now { max-width: 420px; margin-left: auto; padding: 32px 30px 34px 60px; --r: -2deg; }
+.now p { margin: 0; font-size: 15px; }
+
+/* plates */
+.plate { aspect-ratio: 4 / 3; max-width: 100%; display: grid; place-items: center; }
+.plate svg, .mini svg { height: auto; overflow: visible; }
+.plate svg { width: 56%; position: relative; }
+.sketch path { fill: none; stroke: var(--ink-soft); stroke-width: 1; stroke-linecap: round; opacity: .6; }
+.plate small { position: absolute; bottom: 10px; right: 14px; font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 13px; }
+
+/* works */
+.works { display: grid; gap: 0; }
+.work { display: grid; gap: 10px; min-width: 0; scroll-margin-top: 20vh; }
+.work .tagline { font-family: var(--serif); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.work h3 { font-weight: 400; font-size: 22px; margin: 0; letter-spacing: .05em; text-wrap: balance; }
+.work .meta { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 16px; margin: -6px 0 0; }
+.work p { margin: 0; font-size: 15px; max-width: 34em; }
+.w-feature { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 0; align-items: center; margin-bottom: 80px; }
+.w-feature .plate-wrap { padding: 22px; --r: -1deg; }
+.w-feature .caption { margin-left: -70px; padding: 34px 32px 36px; z-index: 2; --r: 2deg; }
+.w-cube { margin: 0 0 90px 22%; padding: 28px 28px 34px; max-width: 520px; --r: 1.6deg; }
+.w-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; }
+.w-draw { padding: 24px 24px 30px 70px; --r: -2deg; }
+.w-oil { margin-top: 110px; padding: 24px 24px 30px; --r: 2.4deg; }
+.tape { position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; transform: translateX(-50%) rotate(-3deg); z-index: 3; }
+
+/* writing */
+.paper-long { padding: 60px clamp(24px, 5vw, 72px) 64px 96px; --r: .4deg; }
+.paper-long.lined > .face { background-image: linear-gradient(90deg, transparent 72px, var(--margin-line) 72px 73px, transparent 73px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); background-position: 0 0, 0 28px; }
+.entry { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 0 24px; padding-block: 32px 0; max-width: 760px; }
+.entry time { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 16px; font-variant-numeric: tabular-nums; }
+.entry h3 { font-weight: 400; font-size: 18px; margin: 0; letter-spacing: .04em; }
+.entry p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+.example { font-family: var(--body); font-size: 11.5px; letter-spacing: .1em; color: var(--ink-soft); border: 1px solid var(--line); padding: 0 7px; border-radius: 2px; margin-left: 10px; vertical-align: 2px; line-height: 20px; }
+
+/* about */
+.about-lead { font-family: var(--serif); font-size: clamp(24px, 3vw, 34px); line-height: 1.5; max-width: 22em; margin: 0 0 56px; text-wrap: balance; }
+.about-lead span { font-family: var(--body); font-size: .62em; display: block; margin-top: 14px; color: var(--ink-soft); line-height: 1.9; }
+.about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.cv h4 { font-family: var(--serif); font-weight: 500; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+.cv ul { list-style: none; padding: 0; margin: 0 0 20px; font-size: 14.5px; }
+.cv { --r: -1.6deg; }
+.quote { margin-top: 90px; padding: 34px 36px; font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.6; --r: 2deg; }
+
+/* footer */
+.foot-wrap { position: relative; z-index: 2; margin-top: 140px; }
+.foot { padding: 76px clamp(24px, 5vw, 72px) calc(32px + env(safe-area-inset-bottom, 0px)); }
+.foot-sign { font-family: var(--script); font-size: clamp(64px, 10vw, 124px); line-height: .9; margin: 0 0 44px; color: var(--fiber); -webkit-text-stroke: .6px rgba(85,54,42,.38); }
+.foot-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 32px; max-width: 900px; }
+.foot h4 { font-family: var(--serif); font-weight: 500; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 12px; }
+.foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-size: 14.5px; }
+.foot a { text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .5s ease; }
+.foot a:hover { background-size: 100% 1px; }
+.foot .mail { font-family: var(--serif); font-size: 18px; user-select: all; margin: 0 0 6px; }
+.foot-base { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 56px; padding-top: 18px; border-top: 1px solid rgba(85,54,42,.2); font-family: var(--serif); font-style: italic; font-size: 14.5px; max-width: 900px; }
+.foot-base .hint { font-family: var(--body); font-style: normal; font-size: 12.5px; letter-spacing: .08em; }
+
+
+@media (max-width: 900px) {
+  .side { width: min(86vw, 320px); transform: translateX(-104%); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .side.open { transform: none; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding: 8px 16px; background: rgba(242,218,208,.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .topbar a { font-family: var(--script); font-size: 38px; line-height: 1.1; text-decoration: none; }
+  main { margin-left: 0; padding-inline: 20px var(--gut-r); }
+  .w-feature, .w-pair, .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .w-feature .caption { margin: -40px 0 0 24px; }
+  .w-cube { margin-left: 16px; }
+  .w-oil { margin-top: 0; }
+  .card { margin-bottom: 30vh; }
+  .selected { margin-left: 12px; }
+  .letter { padding-left: 64px; padding-right: 24px; }
+  .paper-long { padding-left: 84px; }
+  .entry { grid-template-columns: minmax(0, 1fr); }
+  .vine { opacity: .4; right: -30px; }
+  .quote { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .name { animation: none; clip-path: none; }
+  .sub, .statement, .cue { animation: none; opacity: 1; }
+  .js .reveal { opacity: 1; transform: rotate(var(--r, 0deg)); transition: none; }
+}
+</style>
+</head>
+<body>
+
+
+<aside class="side" id="side">
+  <div class="side-paper scrap m-laid t-rose" data-amp="9" data-edges="r" data-lift=".22">
+    <a class="side-name" href="#home">Yi Zhuang</a>
+    <p class="side-zh">以莊</p>
+    <nav aria-label="Site">
+      <a href="#home" data-nav="home">Home <span>首頁</span></a>
+      <a href="#works" data-nav="works">Works <span>作品</span></a>
+      <ul class="side-works">
+        <li><a href="#w-wedding">婚禮儀式<span class="yr">2025</span></a></li>
+        <li><a href="#w-cube">驚喜立方體<span class="yr">2026</span></a></li>
+        <li><a href="#w-drawing">素描</a></li>
+        <li><a href="#w-oil">油畫</a></li>
+      </ul>
+      <a href="#writing" data-nav="writing">Writing <span>書寫</span></a>
+      <a href="#about" data-nav="about">About <span>關於</span></a>
+    </nav>
+    <div class="side-foot">
+      <span class="mail">your.email@example.com</span><br>
+      Taipei · © 2026
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <a href="#home">Yi Zhuang</a>
+  <button class="menu-btn" id="menuBtn" aria-controls="side" aria-expanded="false">index</button>
+</header>
+
+<main id="main">
+
+  <div class="view" data-view="home">
+    <header class="hero">
+      <canvas class="botanic" aria-hidden="true" data-seed="7" data-type="eucalyptus" data-pal="rose" data-origin="1.02,.02" data-dir="2.28" style="right:calc(-1 * var(--gut-r));top:-10px;width:min(62vw,940px);height:900px"></canvas>
+      <h1 class="name">Yi Zhuang</h1>
+      <p class="sub">human, machine, and the space between</p>
+      <div class="statement">
+        <p>以莊，在台北創作。用版畫、行為、文字與程式，思考人和機器之間可以有什麼樣的關係。</p>
+      </div>
+      <span class="cue">scroll, slowly</span>
+    </header>
+
+    <div class="stack col">
+      <canvas class="botanic hide-sm" aria-hidden="true" data-seed="23" data-type="willow" data-pal="madder" data-origin="-.02,.98" data-dir="-.95" style="left:-140px;top:20vh;width:780px;height:1100px"></canvas>
+      <div class="card">
+        <div class="letter scrap m-writing t-shell lined reveal" data-amp="8" data-stack="1" data-lift=".38">
+          <p class="greet">Hello,</p>
+          <p>謝謝你來到這裡。這個網站像一疊還在寫的信，裡面有我做過的作品、正在寫的東西，還有一些還沒有答案的問題。</p>
+          <p>我好奇的是：當關係的另一端不是人，陪伴、親密和儀式會長成什麼樣子。</p>
+          <p style="color:var(--ink-soft);font-size:13px">（這封信是草稿，之後換成你自己的話）</p>
+          <p class="sign">Yi Zhuang</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="selected scrap m-cotton t-blush reveal" data-amp="7" data-style="deckle" data-stack="1" data-lift=".55">
+          <h3>Selected works</h3>
+          <div class="sel-grid">
+            <a href="#w-wedding">
+              <div class="mini scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".06"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M20 100 C60 40 90 30 100 60 S140 90 180 20"/><path d="M100 60 C104 44 112 36 126 32"/></svg></div>
+              <b>婚禮儀式</b><i>performance, 90 min</i>
+            </a>
+            <a href="#w-cube">
+              <div class="mini scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".06"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M70 34 L130 34 L130 94 L70 94 Z"/><path d="M70 34 L90 20 L150 20 L130 34"/><path d="M130 94 L150 80 L150 20"/></svg></div>
+              <b>驚喜立方體</b><i>interactive, p5.js</i>
+            </a>
+          </div>
+          <a class="more" href="#works">all works</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="now scrap m-card t-ivory tag reveal" data-amp="6" data-style="cut" data-stack="2" data-lift=".3">
+          <h3>Now</h3>
+          <p>2026 秋，準備研究所，同時整理這個網站。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" data-view="works" hidden>
+    <div style="padding-top:88px;position:relative">
+      <canvas class="botanic hide-sm" aria-hidden="true" data-seed="41" data-type="gypsophila" data-pal="umber" data-origin="1.02,.04" data-dir="2.5" style="right:calc(-1 * var(--gut-r));top:0;width:min(58vw,820px);height:1000px"></canvas>
+      <h2 class="label reveal">Works</h2>
+      <p class="label-note reveal">performance, interaction, drawing, painting</p>
+    </div>
+    <div class="works">
+      <article class="work w-feature bleed-r" id="w-wedding">
+        <div class="plate-wrap scrap m-cotton t-cotton reveal para" data-speed=".05" data-amp="7" data-edges="tlb" data-style="deckle" data-lift=".28">
+          <div class="plate scrap m-card t-blush" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M20 100 C60 40 90 30 100 60 S140 90 180 20"/><path d="M100 60 C104 44 112 36 126 32"/><path d="M60 72 C54 60 46 54 34 52"/></svg><small>儀式現場照片</small></div>
+        </div>
+        <div class="caption scrap vellum reveal para" data-speed="-.08" data-amp="6">
+          <span class="tagline">Performance · 90 min · 2025</span>
+          <h3>婚禮儀式（作品名）</h3>
+          <p class="meta">行為藝術，完整影像附章節時間點</p>
+          <p>作品說明放這裡。兩三句話，讓人知道這場儀式在做什麼，為什麼是婚禮。</p>
+        </div>
+      </article>
+
+      <article class="work w-cube scrap m-cotton t-blush reveal" id="w-cube" data-amp="7" data-style="deckle" data-stack="1" data-lift=".45">
+        <div class="tape scrap vellum" data-amp="3"></div>
+        <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M70 34 L130 34 L130 94 L70 94 Z"/><path d="M70 34 L90 20 L150 20 L130 34"/><path d="M130 94 L150 80 L150 20"/></svg><small>之後放可直接玩的互動畫面</small></div>
+        <span class="tagline">Interactive · p5.js · 2026</span>
+        <h3>驚喜立方體</h3>
+        <p class="meta">鍵盤互動作品</p>
+      </article>
+      <div class="w-pair">
+        <article class="work w-draw scrap m-writing t-shell lined reveal para" id="w-drawing" data-speed=".06" data-amp="8" data-stack="1" data-lift=".32">
+          <div class="plate scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M40 96 C50 60 70 40 100 36 C130 40 150 60 160 96"/><path d="M100 36 C98 26 102 18 110 14"/></svg><small>素描</small></div>
+          <span class="tagline">Drawing</span>
+          <h3>素描</h3>
+          <p class="meta">系列，年份待填</p>
+        </article>
+        <article class="work w-oil scrap m-laid t-rose reveal para" id="w-oil" data-speed="-.06" data-amp="11" data-lift=".62">
+          <div class="tape scrap vellum" data-amp="3" style="left:24%;transform:translateX(-50%) rotate(7deg)"></div>
+          <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M30 80 C70 70 90 90 120 76 S170 60 176 70"/><path d="M40 40 C60 48 80 36 100 44"/></svg><small>油畫</small></div>
+          <span class="tagline">Oil on canvas</span>
+          <h3>油畫</h3>
+          <p class="meta">系列，年份待填</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" data-view="writing" hidden>
+    <div style="padding-top:88px;position:relative">
+      <h2 class="label reveal">Writing</h2>
+      <p class="label-note reveal">essays, notes, and fiction</p>
+    </div>
+    <div class="paper-long scrap m-writing t-shell lined bleed-r reveal" data-amp="10" data-edges="tlb" data-lift=".14">
+      <canvas class="botanic" aria-hidden="true" data-seed="88" data-type="berry" data-pal="rose" data-soft=".55" data-len=".55" data-fade="" data-origin="1.01,1.02" data-dir="-2.4" style="left:0;top:0;width:100%;height:100%"></canvas>
+      <div class="entry"><time>2026.09</time><div><h3>標題放這裡<span class="example">範例</span></h3><p>一兩行摘要，點進去是完整的文章。</p></div></div>
+      <div class="entry"><time>2026.06</time><div><h3>第二篇文章<span class="example">範例</span></h3><p>書寫區會隨著你寫的東西慢慢長出來。</p></div></div>
+      <div class="entry"><time>2026.03</time><div><h3>第三篇文章<span class="example">範例</span></h3><p>散文、小說、創作筆記都可以放在這裡。</p></div></div>
+      <div class="entry"><time>2025.12</time><div><h3>第四篇文章<span class="example">範例</span></h3><p>信紙的線會一直往下延伸。</p></div></div>
+    </div>
+  </div>
+
+  <div class="view" data-view="about" hidden>
+    <div style="padding-top:88px;position:relative">
+      <canvas class="botanic hide-sm" aria-hidden="true" data-seed="103" data-type="eucalyptus" data-pal="madder" data-origin="1.02,.95" data-dir="-2.25" style="right:calc(-1 * var(--gut-r));top:40px;width:min(52vw,720px);height:900px"></canvas>
+      <h2 class="label reveal">About</h2>
+      <p class="label-note reveal">a short introduction</p>
+    </div>
+    <p class="about-lead reveal">Yi Zhuang makes prints, performances, and small interactive machines.<span>以莊，創作橫跨木刻版畫、插畫、行為藝術與 p5.js 互動作品，也寫散文和小說。研究關注人與機器之間的關係。（草稿）</span></p>
+    <div class="about-grid">
+      <div class="cv scrap m-card t-ivory tag reveal" data-amp="6" data-style="cut" data-stack="1" data-lift=".26">
+        <h4>Education</h4>
+        <ul><li>國立臺灣藝術大學 美術學系</li></ul>
+        <h4>Experience</h4>
+        <ul><li>台北當代藝術館 研究組實習</li></ul>
+        <h4>Exhibitions &amp; Awards</h4>
+        <ul><li>待補</li></ul>
+      </div>
+      <div class="quote scrap vellum reveal para" data-speed="-.07" data-amp="6">放一句你喜歡的話，或一段創作自述裡最重要的一句。</div>
+    </div>
+  </div>
+
+  <div class="foot-wrap" id="contact">
+    <div class="foot scrap m-cotton t-rose bleed-r reveal" data-amp="11" data-edges="tl" data-lift=".12">
+      <canvas class="botanic" aria-hidden="true" data-seed="131" data-type="willow" data-pal="umber" data-soft=".75" data-len=".55" data-fade="" data-origin="1.01,-.03" data-dir="2.35" style="left:0;top:0;width:100%;height:100%"></canvas>
+      <p class="foot-sign">thank you</p>
+      <div class="foot-cols">
+        <div><h4>Contact</h4><p class="mail">your.email@example.com</p><ul><li>委託、合作、展覽邀約</li></ul></div>
+        <div><h4>Elsewhere</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li><li><a href="#">GitHub</a></li></ul></div>
+        <div><h4>Index</h4><ul><li><a href="#home">Home</a></li><li><a href="#works">Works</a></li><li><a href="#writing">Writing</a></li><li><a href="#about">About</a></li></ul></div>
+        <div><h4>Colophon</h4><ul><li>手寫字：以莊</li><li>內文：Noto Serif TC</li><li>網站：GitHub Pages</li></ul></div>
+      </div>
+      <div class="foot-base"><span>© 2026 Yi Zhuang</span><span class="hint">游標會留下墨痕，按住會更濕一點</span></div>
+    </div>
+  </div>
+</main>
+
+<script>
+document.documentElement.classList.add('js');
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DPR = Math.min(devicePixelRatio || 1, 2);
+  const rng = s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+  const smooth = t => t * t * (3 - 2 * t);
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  /* ================= noise (continuous, seeded) ================= */
+  function makeNoise(seed) {
+    const r = rng(seed), P = new Uint16Array(512), V = new Float32Array(256);
+    for (let i = 0; i < 256; i++) { P[i] = i; V[i] = r(); }
+    for (let i = 255; i > 0; i--) { const j = (r() * (i + 1)) | 0; const t = P[i]; P[i] = P[j]; P[j] = t; }
+    for (let i = 0; i < 256; i++) P[i + 256] = P[i];
+    const h = (x, y) => V[P[P[x & 255] + (y & 255)]];
+    return (x, y = 0) => {
+      const xi = Math.floor(x), yi = Math.floor(y), u = smooth(x - xi), v = smooth(y - yi);
+      const a = h(xi, yi), b = h(xi + 1, yi), c = h(xi, yi + 1), d = h(xi + 1, yi + 1);
+      return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+    };
+  }
+  function periodic(seed, px, py) {
+    const r = rng(seed), V = new Float32Array(px * py);
+    for (let i = 0; i < V.length; i++) V[i] = r();
+    const h = (x, y) => V[((y % py + py) % py) * px + ((x % px + px) % px)];
+    return (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), u = smooth(x - xi), v = smooth(y - yi); const a = h(xi, yi), b = h(xi + 1, yi), c = h(xi, yi + 1), d = h(xi + 1, yi + 1); return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; };
+  }
+
+  /* ================= paper: one physics, many sheets ================= */
+  const nA = makeNoise(101), nF = makeNoise(202), nG = makeNoise(303);
+  const FA = .32, fc = Math.cos(FA), fs = Math.sin(FA);
+  function Sheet(ox, oy) { this.ox = ox; this.oy = oy; }
+  Sheet.prototype.absorb = function (x, y) {
+    x += this.ox; y += this.oy;
+    const big = nA(x / 280, y / 280) * .62 + nA(x / 110 + 40, y / 110) * .38;
+    const u = x * fc + y * fs, v = -x * fs + y * fc;
+    return clamp(big * .55 + nF(u / 64, v / 3.2) * .3 + nG(x / 1.4, y / 1.4) * .15, 0, 1);
+  };
+  Sheet.prototype.tooth = function (x, y) { x += this.ox; y += this.oy; return nG(x / 1.1 + 17, y / 1.1 - 9) * .7 + nF(x / 3, y / 3) * .3; };
+  Sheet.prototype.fiber = function (x, y) { return FA + (nF((x + this.ox) / 90, (y + this.oy) / 90) - .5) * .8; };
+
+  /* ================= materials ================= */
+  const INK = '64,38,30', GRAPHITE = '98,90,86';
+  function inkDot(ctx, sh, x, y, r, dens, wet, col = INK) {
+    const a = sh.absorb(x, y), t = sh.tooth(x, y);
+    const dry = .5 - wet * .5 - dens * .24;
+    const fa = sh.fiber(x, y);
+    if (t > dry) {
+      ctx.fillStyle = `rgba(${col},${(dens * (.12 + .2 * a)).toFixed(3)})`;
+      ctx.beginPath(); ctx.ellipse(x, y, r * (.8 + .4 * t), r * (.6 + .35 * a), fa, 0, 6.2832); ctx.fill();
+    } else if (t > dry - .1) {
+      ctx.fillStyle = `rgba(${col},${(dens * .05).toFixed(3)})`;
+      ctx.fillRect(x - r * .3, y - r * .3, r * .6, r * .6);
+    }
+    if (wet > .05 && Math.random() < .25 + wet * .45) {
+      const br = r * (1.8 + 2.8 * wet * a) * (.7 + Math.random() * .6);
+      ctx.fillStyle = `rgba(${col},${((.01 + .028 * wet) * (.5 + a)).toFixed(3)})`;
+      ctx.beginPath(); ctx.ellipse(x + (Math.random() - .5) * r * 1.4, y + (Math.random() - .5) * r * 1.4, br, br * (.55 + .4 * Math.random()), fa + (Math.random() - .5) * .6, 0, 6.2832); ctx.fill();
+    }
+    if (Math.random() < wet * a * .08 + dens * .004) {
+      const ang = fa + (Math.random() < .5 ? 0 : Math.PI) + (Math.random() - .5) * .45, len = 2 + 9 * wet * a + Math.random() * 3;
+      ctx.strokeStyle = `rgba(${col},${(.05 + .08 * wet).toFixed(3)})`; ctx.lineWidth = .35 + Math.random() * .35;
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(ang + .3) * len * .5, y + Math.sin(ang + .3) * len * .5, x + Math.cos(ang) * len, y + Math.sin(ang) * len); ctx.stroke();
+    }
+  }
+  function inkBlot(ctx, sh, x, y, size, wet) {
+    const n = 4 + (Math.random() * 5 | 0), ang0 = Math.random() * 6.28;
+    for (let i = 0; i < n; i++) {
+      const a = ang0 + i * 2.4 + Math.random(), d = Math.random() * size * 1.1;
+      inkDot(ctx, sh, x + Math.cos(a) * d, y + Math.sin(a) * d * .8, size * (.35 + Math.random() * .7), .5 + Math.random() * .4, wet);
+    }
+  }
+  function graphite(ctx, sh, x, y, a) {
+    const t = sh.tooth(x, y);
+    if (t < .42) return;
+    ctx.fillStyle = `rgba(${GRAPHITE},${(a * (.5 + (t - .42) * 1.6)).toFixed(3)})`;
+    const s = .45 + Math.random() * .5;
+    ctx.fillRect(x + (Math.random() - .5) * .7, y + (Math.random() - .5) * .7, s, s * (.5 + Math.random() * .6));
+  }
+
+  /* ================= gestures: correlated hand movement ================= */
+  function gesture(x, y, h, len, o = {}) {
+    const n = makeNoise(o.seed || 1), pts = [], step = .5;
+    const bendA = o.bend || 0, wob = o.wobble ?? .35, grav = o.gravity || 0, detach = o.detach || 0, dl = o.detachLen || 20;
+    for (let s = 0; s <= len; s += step) {
+      const q = s / len;
+      const hh = h + bendA * q + (n(s * .012 + 3) - .5) * wob + (n(s * .06 + 9) - .5) * wob * .25
+        + detach * smooth(clamp(s / dl, 0, 1)) + grav * q * q;
+      x += Math.cos(hh) * step; y += Math.sin(hh) * step;
+      const press = clamp((o.pw || 1) * (.55 + .75 * n(s * .035 + 21)) * Math.min(1, .3 + s / 5) * (1 - Math.pow(q, 1.6) * (o.taper ?? .6)), .25, 2);
+      pts.push(x, y, press);
+    }
+    return { pts, x, y, h: pts.length > 6 ? Math.atan2(pts[pts.length - 2] - pts[pts.length - 5], pts[pts.length - 3] - pts[pts.length - 6]) : h };
+  }
+  const tipOf = g => [g.pts[g.pts.length - 3], g.pts[g.pts.length - 2]];
+
+  /* ================= botanicals: dyed into the paper, not drawn on top ================= */
+
+  function boxBlur(src, w, h, r) {
+    if (r < 1) return src.slice();
+    const tmp = new Float32Array(w * h), out = new Float32Array(w * h), k = 1 / (2 * r + 1);
+    for (let y = 0; y < h; y++) {
+      let acc = 0; const row = y * w;
+      for (let x = -r; x <= r; x++) acc += src[row + clamp(x, 0, w - 1)];
+      for (let x = 0; x < w; x++) { tmp[row + x] = acc * k; acc += src[row + Math.min(x + r + 1, w - 1)] - src[row + Math.max(x - r, 0)]; }
+    }
+    for (let x = 0; x < w; x++) {
+      let acc = 0;
+      for (let y = -r; y <= r; y++) acc += tmp[clamp(y, 0, h - 1) * w + x];
+      for (let y = 0; y < h; y++) { out[y * w + x] = acc * k; acc += tmp[Math.min(y + r + 1, h - 1) * w + x] - tmp[Math.max(y - r, 0) * w + x]; }
+    }
+    return out;
+  }
+  const blur2 = (a, w, h, r) => boxBlur(boxBlur(a, w, h, r), w, h, r);
+
+  /* ---- plant geometry (CSS px) ---- */
+  function growPlant(type, seed, W, H, ox, oy, dir, lenK = 1) {
+    const r = rng(seed), P = { stems: [], leaves: [], dots: [], pen: [], contours: [] };
+    const S = Math.max(W, H);
+    function path(x, y, h, len, w0, sd, o = {}) {
+      const n = makeNoise(sd), pts = [];
+      const bend = o.bend || 0, det = o.detach || 0, dl = o.dl || 30, grav = o.grav || 0;
+      for (let s = 0; s <= len; s += 2) {
+        const q = s / len;
+        const hh = h + bend * q + (n(s * .006 + 3) - .5) * .9 + (n(s * .03 + 9) - .5) * .18 + det * smooth(clamp(s / dl, 0, 1)) + grav * q * q;
+        x += Math.cos(hh) * 2; y += Math.sin(hh) * 2;
+        pts.push([x, y, Math.max(.8, w0 * (1 - q * .78) * (.8 + .4 * n(s * .02 + 40))), hh]);
+      }
+      return pts;
+    }
+    function leaf(bx, by, a, L, Wd, shape, sd) {
+      const rr = rng(sd), n = makeNoise(sd), curl = (rr() - .5) * .9, poly = [], left = [], right = [];
+      const notchAt = rr() < .35 ? .3 + rr() * .5 : -1;
+      for (let t = 0; t <= 1.0001; t += .04) {
+        const ang = a + curl * t;
+        const cx = bx + Math.cos(a + curl * t * .5) * t * L, cy = by + Math.sin(a + curl * t * .5) * t * L;
+        let wv = shape === 'round' ? Math.pow(Math.sin(Math.PI * Math.pow(t, .75)), .65) : Math.pow(Math.sin(Math.PI * t), 1.15) * (1 - .25 * t);
+        wv *= Wd;
+        const wl = wv * (.85 + .3 * n(t * 3 + 1)), wr = wv * (.85 + .3 * n(t * 3 + 7)) * (notchAt > 0 && Math.abs(t - notchAt) < .08 ? .35 : 1);
+        const px = -Math.sin(ang), py = Math.cos(ang);
+        left.push([cx + px * wl, cy + py * wl]); right.push([cx - px * wr, cy - py * wr]);
+      }
+      P.leaves.push(left.concat(right.reverse()));
+      if (rr() < .55) P.contours.push({ pts: rr() < .5 ? left : right.slice().reverse(), w: .7 });
+      if (rr() < .5) { const mid = []; for (let t = 0; t <= .85; t += .05) mid.push([bx + Math.cos(a + curl * t * .5) * t * L, by + Math.sin(a + curl * t * .5) * t * L]); P.pen.push({ pts: mid, w: .55 }); }
+    }
+    function branch(x, y, h, len, w0, depth, sd, o = {}) {
+      const pts = path(x, y, h, len, w0, sd, o), rr = rng(sd * 3 + 1);
+      P.stems.push(pts);
+      if (rr() < .7 || depth >= 2) P.pen.push({ pts: pts.filter((_, i) => i % 1 === 0).map(p => [p[0], p[1]]), w: Math.min(1.1, .5 + w0 * .1) });
+      const N = pts.length;
+      let side = rr() < .5 ? 1 : -1;
+      const every = type === 'gypsophila' ? 9 : type === 'willow' ? 15 : type === 'eucalyptus' ? 19 : 10;
+      for (let i = 6; i < N - 2; i += every + (rr() * every | 0)) {
+        const [px, py, pw, ph] = pts[i], q = i / N;
+        if (depth > 0 && rr() < (type === 'gypsophila' ? .55 : type === 'berry' ? .3 : .16)) {
+          branch(px, py, ph, len * (.35 + rr() * .3) * (1 - q * .4), pw * .75, depth - 1, sd * 7 + i, { detach: side * (.45 + rr() * .5), dl: 18 + rr() * 30, grav: type === 'willow' ? .5 : .15 });
+        }
+        if (type === 'eucalyptus') {
+          const L = 30 + rr() * 28 * (1 - q * .4), a = ph + side * (.8 + rr() * .6);
+          const stemL = 5 + rr() * 7, sx = px + Math.cos(a) * stemL, sy = py + Math.sin(a) * stemL;
+          P.stems.push([[px, py, 1.2, a], [sx, sy, .9, a]]);
+          leaf(sx, sy, a + (rr() - .5) * .5, L, L * (.42 + rr() * .15), 'round', sd * 13 + i);
+        } else if (type === 'willow') {
+          const L = 60 + rr() * 70 * (1 - q * .3), a = ph + side * (.3 + rr() * .4);
+          leaf(px, py, a, L, 6 + rr() * 6, 'lance', sd * 13 + i);
+        } else if (type === 'berry') {
+          if (rr() < .55) { const L = 28 + rr() * 30; leaf(px, py, ph + side * (.5 + rr() * .5), L, 7 + rr() * 5, 'lance', sd * 13 + i); }
+        }
+        side = -side;
+      }
+      const [tx, ty, , th] = pts[N - 1];
+      if (type === 'gypsophila' || type === 'berry') {
+        const k = type === 'berry' ? 3 + (rr() * 4 | 0) : 1 + (rr() * 2 | 0);
+        for (let j = 0; j < k; j++) {
+          const a = th + (rr() - .5) * 2.2, d = type === 'berry' ? 6 + rr() * 14 : 0;
+          const cx = tx + Math.cos(a) * d, cy = ty + Math.sin(a) * d;
+          if (d) P.stems.push([[tx, ty, 1, a], [cx, cy, .8, a]]);
+          const R = type === 'berry' ? 4 + rr() * 4 : 3.5 + rr() * 5;
+          P.dots.push([cx + Math.cos(a) * R * .6, cy + Math.sin(a) * R * .6, R]);
+          if (rr() < .4) P.contours.push({ pts: Array.from({ length: 14 }, (_, u) => { const aa = a + u * .5; return [cx + Math.cos(a) * R * .6 + Math.cos(aa) * R, cy + Math.sin(a) * R * .6 + Math.sin(aa) * R]; }), w: .6 });
+        }
+      }
+    }
+    const main = type === 'gypsophila' ? 3 : 2;
+    const len = S * (type === 'gypsophila' ? .95 : 1.05) * lenK;
+    branch(ox * W, oy * H, dir, len, 8, main, seed, { bend: (r() - .5) * .8, grav: type === 'willow' ? .35 : 0 });
+    if (r() < .55) branch(ox * W + (r() - .5) * 60, oy * H + (r() - .5) * 60, dir + (r() - .5) * .9, len * (.45 + r() * .2), 5.5, main - 1, seed + 777, { bend: (r() - .5) * 1.2 });
+    return P;
+  }
+
+  /* ---- raster helpers at working resolution ---- */
+  function rasterMask(P, w, h, sc, keep, dx = 0, dy = 0) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const x = c.getContext('2d'); x.setTransform(sc, 0, 0, sc, dx * sc, dy * sc);
+    x.fillStyle = '#000'; x.strokeStyle = '#000'; x.lineCap = 'round'; x.lineJoin = 'round';
+    for (const st of P.stems) for (let i = 1; i < st.length; i++) { x.lineWidth = st[i][2]; x.beginPath(); x.moveTo(st[i - 1][0], st[i - 1][1]); x.lineTo(st[i][0], st[i][1]); x.stroke(); }
+    P.leaves.forEach((lf, i) => { if (!keep(i)) return; x.beginPath(); lf.forEach(([a, b], j) => j ? x.lineTo(a, b) : x.moveTo(a, b)); x.closePath(); x.fill(); });
+    P.dots.forEach(([a, b, R], i) => { if (!keep(i + 999)) return; x.beginPath(); x.arc(a, b, R, 0, 6.2832); x.fill(); });
+    const d = x.getImageData(0, 0, w, h).data, M = new Float32Array(w * h);
+    for (let i = 0; i < M.length; i++) M[i] = d[i * 4 + 3] / 255;
+    return M;
+  }
+  function displace(M, w, h, amp, seed) {
+    const n1 = makeNoise(seed), n2 = makeNoise(seed + 1), O = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const ddx = (n1(x / 9, y / 9) - .5) * amp + (n2(x / 2.5, y / 2.5) - .5) * amp * .35;
+      const ddy = (n1(x / 9 + 50, y / 9) - .5) * amp + (n2(x / 2.5 + 50, y / 2.5) - .5) * amp * .35;
+      const sx = clamp(Math.round(x + ddx), 0, w - 1), sy = clamp(Math.round(y + ddy), 0, h - 1);
+      O[y * w + x] = M[sy * w + sx];
+    }
+    return O;
+  }
+  /* one wash of dye: pigment pools at edges, bleeds out, blooms where water returns, granulates in the paper tooth */
+  function wash(M, w, h, sc, o, seed, sh) {
+    const rs = Math.max(1, Math.round(2.2 * sc * 2)), rl = Math.max(2, Math.round(o.halo * sc));
+    const bS = blur2(M, w, h, rs), bL = blur2(M, w, h, rl);
+    const nb = makeNoise(seed + 11), nb2 = makeNoise(seed + 12), nu = makeNoise(seed + 13);
+    const img = new ImageData(w, h), D = img.data, [cr, cg, cb] = o.color;
+    const out = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = y * w + x, m = M[i], X = x / sc, Y = y / sc;
+      const edge = clamp(m * (1 - bS[i]) * 2.4, 0, 1);
+      let dens = m * (o.base + o.rim * edge);
+      const halo = Math.max(0, bL[i] - m) * o.haloK;
+      const bn = nb(X / 38, Y / 38) * .78 + nb2(X / 6, Y / 6) * .22;
+      const t = o.bloomTh, band = Math.exp(-Math.pow((bn - t) * 34, 2));
+      if (bn > t) dens *= o.bloomLight;
+      dens += band * m * o.bloomEdge;
+      const uneven = .6 + .8 * nu(X / 130, Y / 130);
+      const tooth = sh.tooth(X, Y), gran = .72 + .56 * tooth;
+      const a = clamp((dens + halo) * uneven * gran * o.alpha, 0, 1);
+      out[i] = a;
+      D[i * 4] = cr; D[i * 4 + 1] = cg; D[i * 4 + 2] = cb; D[i * 4 + 3] = a * 255;
+    }
+    return { img, dens: out };
+  }
+  /* flat brush (排筆): bristle streaks, dry toward the end, hard edges with a little pooling */
+  function flatBrush(w, h, sc, strokes, color, seed, sh) {
+    const img = new ImageData(w, h), D = img.data, nb = makeNoise(seed + 21), nd = makeNoise(seed + 22), ne = makeNoise(seed + 23);
+    const field = new Float32Array(w * h).fill(9);
+    for (const st of strokes) {
+      const { x0, y0, a, L, Wd, alpha } = st, ca = Math.cos(a), sa = Math.sin(a);
+      const pad = Wd + 20, xs = [x0, x0 + ca * L], ys = [y0, y0 + sa * L];
+      const minx = Math.max(0, Math.floor((Math.min(...xs) - pad) * sc)), maxx = Math.min(w - 1, Math.ceil((Math.max(...xs) + pad) * sc));
+      const miny = Math.max(0, Math.floor((Math.min(...ys) - pad) * sc)), maxy = Math.min(h - 1, Math.ceil((Math.max(...ys) + pad) * sc));
+      for (let y = miny; y <= maxy; y++) for (let x = minx; x <= maxx; x++) {
+        const X = x / sc - x0, Y = y / sc - y0, u = X * ca + Y * sa, v = -X * sa + Y * ca;
+        const half = Wd / 2 * (1 + (ne(u / 40, 3) - .5) * .12);
+        const end = L * (.9 + .15 * ne(v / 20, 9));
+        if (u < -2 || u > end || Math.abs(v) > half) continue;
+        const q = u / L, bristle = nb(v / 1.6 + 30, u / 90);
+        const dryness = clamp(q * 1.1 - .25, 0, .8) + (1 - (sh.tooth(X + x0, Y + y0))) * .15;
+        if (bristle < dryness * .95) continue;
+        const rim = Math.pow(Math.abs(v) / half, 6) * .5;
+        const start = clamp(u / 8, 0, 1);
+        const a2 = alpha * (.55 + .5 * bristle) * (1 + rim) * start * (.75 + .5 * nd(u / 60, v / 60));
+        const i = y * w + x, prev = D[i * 4 + 3] / 255, comb = 1 - (1 - prev) * (1 - clamp(a2, 0, 1));
+        D[i * 4] = color[0]; D[i * 4 + 1] = color[1]; D[i * 4 + 2] = color[2]; D[i * 4 + 3] = comb * 255;
+        field[i] = Math.min(field[i], clamp(u / L, 0, 1));
+      }
+    }
+    return { img, field };
+  }
+  const toCanvas = img => { const c = document.createElement('canvas'); c.width = img.width; c.height = img.height; c.getContext('2d').putImageData(img, 0, 0); return c; };
+
+  /* ---- pigments ---- */
+  const PAL = {
+    rose:   { base: [[222, 160, 150], [234, 188, 162], [198, 162, 178]], drop: [[166, 78, 92], [120, 84, 128]], sage: [166, 176, 150], ochre: [216, 180, 116], glaze: [172, 150, 180], brush: [214, 162, 148], line: '96,40,74', lead: '98,90,86' },
+    madder: { base: [[214, 144, 150], [206, 170, 186], [230, 180, 160]], drop: [[146, 56, 74], [102, 72, 116]], sage: [160, 170, 146], ochre: [208, 170, 110], glaze: [158, 146, 178], brush: [208, 150, 146], line: '86,32,58', lead: '96,88,86' },
+    umber:  { base: [[214, 172, 146], [204, 178, 172], [222, 192, 152]], drop: [[136, 86, 64], [110, 88, 112]], sage: [160, 166, 136], ochre: [206, 166, 96], glaze: [186, 160, 150], brush: [206, 168, 140], line: '74,44,34', lead: '100,92,86' }
+  };
+  const lerp3 = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
+
+  function displaceSc(M, w, h, sc, ampCss, seed) {
+    const n1 = makeNoise(seed), n2 = makeNoise(seed + 1), O = new Float32Array(w * h), amp = ampCss * sc;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const X = x / sc, Y = y / sc;
+      const ddx = (n1(X / 18, Y / 18) - .5) * amp + (n2(X / 5, Y / 5) - .5) * amp * .35;
+      const ddy = (n1(X / 18 + 50, Y / 18) - .5) * amp + (n2(X / 5 + 50, Y / 5) - .5) * amp * .35;
+      O[y * w + x] = M[clamp(Math.round(y + ddy), 0, h - 1) * w + clamp(Math.round(x + ddx), 0, w - 1)];
+    }
+    return O;
+  }
+  /* a wash whose colour drifts, the way a loaded brush mixes on wet paper */
+  function washMixed(M, w, h, sc, o, seed, sh) {
+    const rs = Math.max(1, Math.round(4.4 * sc)), rl = Math.max(2, Math.round(o.halo * sc));
+    const bS = blur2(M, w, h, rs), bL = o.halo ? blur2(M, w, h, rl) : null;
+    const nb = makeNoise(seed + 11), nb2 = makeNoise(seed + 12), nu = makeNoise(seed + 13);
+    const c1 = makeNoise(seed + 14), c2 = makeNoise(seed + 15), c3 = makeNoise(seed + 16), c4 = makeNoise(seed + 17);
+    const img = new ImageData(w, h), D = img.data;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = y * w + x, m = M[i];
+      const halo = bL ? Math.max(0, bL[i] - m) * o.haloK : 0;
+      if (m <= .001 && halo <= .002) continue;
+      const X = x / sc, Y = y / sc;
+      const edge = clamp(m * (1 - bS[i]) * 2.4, 0, 1);
+      let dens = m * (o.base + o.rim * edge);
+      if (o.bloomTh < 1.5) {
+        const bn = nb(X / 38, Y / 38) * .78 + nb2(X / 6, Y / 6) * .22, band = Math.exp(-Math.pow((bn - o.bloomTh) * 34, 2));
+        if (bn > o.bloomTh) dens *= o.bloomLight;
+        dens += band * m * o.bloomEdge;
+      }
+      const uneven = .6 + .8 * nu(X / 130, Y / 130), gran = .72 + .56 * sh.tooth(X, Y);
+      const a = clamp((dens + halo) * uneven * gran * o.alpha, 0, 1);
+      let col;
+      if (o.colors) {
+        col = lerp3(o.colors[0], o.colors[1], smooth(c1(X / 170, Y / 170)));
+        col = lerp3(col, o.colors[2], smooth(clamp((c2(X / 95 + 20, Y / 95) - .45) * 2.4, 0, 1)));
+        if (o.sage) col = lerp3(col, o.sage, clamp((c3(X / 210, Y / 210) - .64) * 3.2, 0, .85));
+        if (o.ochre) col = lerp3(col, o.ochre, clamp((c4(X / 55, Y / 55) - .74) * 3.5, 0, .6));
+      } else col = o.color;
+      D[i * 4] = col[0]; D[i * 4 + 1] = col[1]; D[i * 4 + 2] = col[2]; D[i * 4 + 3] = a * 255;
+    }
+    return img;
+  }
+  /* wet-in-wet: darker pigment dropped into the first wash while it is still wet.
+     It can only travel where that water is, spreads from where it touched down, and feathers at the front. */
+  function dropIn(MA, w, h, sc, o, seed, sh) {
+    const nb = makeNoise(seed + 31), nc = makeNoise(seed + 32), nu = makeNoise(seed + 33), ns = makeNoise(seed + 34);
+    const core = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = y * w + x; if (MA[i] <= 0) continue;
+      const X = x / sc, Y = y / sc;
+      core[i] = MA[i] * smooth(clamp((nb(X / 48, Y / 48) - o.coreTh) * 3.2, 0, 1)) * (.6 + .6 * ns(X / 14, Y / 14));
+    }
+    const water = blur2(MA, w, h, Math.max(1, Math.round(3 * sc)));
+    const far = blur2(core, w, h, Math.max(2, Math.round(o.spread * sc)));
+    const near = blur2(core, w, h, Math.max(1, Math.round(o.spread * .3 * sc)));
+    const img = new ImageData(w, h), D = img.data, field = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = y * w + x, wet = clamp(water[i] * 1.35, 0, 1);
+      if (wet <= .01) continue;
+      const X = x / sc, Y = y / sc;
+      const d = clamp(far[i] * 1.7 + near[i] * .7, 0, 1.3);
+      if (d < .005) continue;
+      const front = Math.exp(-Math.pow((far[i] - .09) * 20, 2)) * .22 * (d > .03 ? 1 : 0);
+      let a = (Math.pow(clamp(d, 0, 1), .8) * .9 + front) * wet;
+      a *= (.7 + .6 * sh.tooth(X, Y)) * (.75 + .5 * nu(X / 90, Y / 90)) * o.alpha;
+      const col = lerp3(o.colors[0], o.colors[1], smooth(nc(X / 120, Y / 120)));
+      const thin = lerp3(o.thin, col, clamp(d * 1.5, 0, 1));
+      D[i * 4] = thin[0]; D[i * 4 + 1] = thin[1]; D[i * 4 + 2] = thin[2]; D[i * 4 + 3] = clamp(a, 0, 1) * 255;
+      field[i] = d;
+    }
+    return { img, field };
+  }
+
+  const NOTES = {
+    eucalyptus: { latin: 'Eucalyptus cinerea', zh: '尤加利．打濕後再點一次深色', type: 'dried 3 wks / wash x2' },
+    willow: { latin: 'Salix babylonica', zh: '柳葉，葉尖留白', type: 'pressed, sept.' },
+    gypsophila: { latin: 'Gypsophila paniculata', zh: '滿天星，乾了會偏褐', type: 'umber / no. 41' },
+    berry: { latin: 'Hypericum', zh: '果實先點水', type: 'rose / no. 88' }
+  };
+  let fontsReady = null;
+  function whenFonts() {
+    if (!fontsReady) {
+      const loads = ['15px "Nothing You Could Do"', '12px "LXGW WenKai TC"', '11px "Special Elite"'].map(f => document.fonts ? document.fonts.load(f, f.includes('LXGW') ? '尤加利柳葉滿天星果實' : 'Aa') : Promise.resolve());
+      fontsReady = Promise.race([Promise.all(loads).catch(() => {}), new Promise(r => setTimeout(r, 3500))]);
+    }
+    return fontsReady;
+  }
+
+  /* ---- a composition: pencil, then washes (brush, first wash, wet-in-wet, dry glaze), then pigment line, then typed notes ---- */
+  function Botanic(cv) { this.cv = cv; this.ready = false; this.started = false; this.want = false; this.done = false; this.t = 0; this.job = null; this.notes = []; }
+  Botanic.prototype.build = function () { if (!this.job && !this.ready) this.job = this.steps(); };
+  Botanic.prototype.step = function () {
+    if (!this.job) return;
+    const r = this.job.next();
+    if (r.done) { this.job = null; this.ready = true; this.render(0); if (this.want) this.begin(); }
+  };
+  Botanic.prototype.begin = function () { this.started = true; if (reduce) this.finish(); };
+  Botanic.prototype.steps = function* () {
+    const cv = this.cv, W = cv.offsetWidth, H = cv.offsetHeight;
+    if (!W || !H) return;
+    const seed = +cv.dataset.seed, type = cv.dataset.type, pal = PAL[cv.dataset.pal] || PAL.rose, soft = +(cv.dataset.soft || 1);
+    const [ox, oy] = cv.dataset.origin.split(',').map(Number), dir = +cv.dataset.dir;
+    const sc = Math.min(1, Math.sqrt(1.1e6 / (W * H))), w = Math.ceil(W * sc), h = Math.ceil(H * sc);
+    this.pal = pal; this.W = W; this.H = H; this.w = w; this.h = h; this.sc = sc;
+    const sides = cv.dataset.fade != null ? cv.dataset.fade : (ox > .9 ? '' : 'r') + (ox < .1 ? '' : 'l') + (oy < .1 ? '' : 't') + (oy > .9 ? '' : 'b');
+    const FD = 90 * sc, fade = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      let f = 1;
+      if (sides.includes('l')) f = Math.min(f, x / FD); if (sides.includes('r')) f = Math.min(f, (w - 1 - x) / FD);
+      if (sides.includes('t')) f = Math.min(f, y / FD); if (sides.includes('b')) f = Math.min(f, (h - 1 - y) / FD);
+      fade[y * w + x] = smooth(clamp(f, 0, 1));
+    }
+    this.fadeAt = (x, y) => fade[clamp(Math.round(y * sc), 0, h - 1) * w + clamp(Math.round(x * sc), 0, w - 1)];
+    const applyFade = img => { const d = img.data; for (let i = 0; i < fade.length; i++) d[i * 4 + 3] *= fade[i]; return img; };
+    const sh = new Sheet(seed * 311, seed * 173); this.sh = sh;
+    const P = growPlant(type, seed, W, H, ox, oy, dir, +(cv.dataset.len || 1)); this.P = P;
+    const r = rng(seed * 5);
+    yield;
+    const shiftX = (r() - .5) * 18 + 6, shiftY = (r() - .5) * 18 + 5;
+    const MA = displaceSc(rasterMask(P, w, h, sc, () => r() < .9, shiftX, shiftY), w, h, sc, 6.4, seed + 1);
+    yield;
+    const A = washMixed(MA, w, h, sc, { colors: pal.base, sage: pal.sage, ochre: pal.ochre, base: .4, rim: .7, halo: 16, haloK: .5, bloomTh: .6, bloomLight: .64, bloomEdge: .45, alpha: .6 * soft }, seed + 3, sh);
+    yield;
+    const Dp = dropIn(MA, w, h, sc, { colors: pal.drop, thin: pal.base[2], coreTh: .5, spread: 20, alpha: .62 * soft }, seed + 4, sh);
+    yield;
+    const gx = (r() - .5) * 12, gy = (r() - .5) * 12;
+    const MG = displaceSc(rasterMask(P, w, h, sc, i => ((i + seed) * 2654435761 >>> 0) % 10 < 4, gx, gy), w, h, sc, 3, seed + 2);
+    const G = washMixed(MG, w, h, sc, { color: pal.glaze, base: .55, rim: .9, halo: 3, haloK: .12, bloomTh: 2, bloomLight: 1, bloomEdge: 0, alpha: .34 * soft }, seed + 5, sh);
+    yield;
+    const strokes = [], nS = 1 + (r() * 2 | 0);
+    for (let k = 0; k < nS; k++) {
+      const a = dir + Math.PI + (r() - .5) * .5 + (r() < .4 ? Math.PI / 2 : 0);
+      strokes.push({ x0: W * (.15 + r() * .7), y0: H * (.1 + r() * .7), a, L: Math.max(W, H) * (.35 + r() * .35), Wd: 36 + r() * 60, alpha: (.14 + r() * .12) * soft });
+    }
+    const Br = flatBrush(w, h, sc, strokes, pal.brush, seed + 6, sh);
+    yield;
+
+    /* timeline */
+    const T = { pencil: [0, 2.8], brush: [3.0, 1.2], wash: [3.4, 2.4], drop: [4.6, 3.0], glaze: [8.2, 1.6], pen: 9.4 };
+    this.T = T;
+    const qx = Math.ceil(w / 4), qy = Math.ceil(h / 4), rn = makeNoise(seed + 9);
+    const OX = ox * W, OY = oy * H, maxD = Math.hypot(W, H), ga = r() * 6.28;
+    const Rw = new Float32Array(qx * qy), Rb = new Float32Array(qx * qy), Rd = new Float32Array(qx * qy), Rg = new Float32Array(qx * qy);
+    for (let y = 0; y < qy; y++) for (let x = 0; x < qx; x++) {
+      const X = x * 4 / sc, Y = y * 4 / sc, j = y * qx + x, k = Math.min(h - 1, y * 4) * w + Math.min(w - 1, x * 4);
+      Rw[j] = clamp(Math.hypot(X - OX, Y - OY) / maxD * .85 + (rn(X / 70, Y / 70) - .5) * .35 + .1, 0, 1);
+      const f = Br.field[k]; Rb[j] = f < 9 ? f : 1;
+      Rd[j] = clamp(1 - Dp.field[k] * 1.25, 0, 1);
+      Rg[j] = clamp(((X / W) * Math.cos(ga) + (Y / H) * Math.sin(ga)) * .5 + .5 + (rn(X / 40 + 9, Y / 40) - .5) * .2, 0, 1);
+    }
+    this.layers = [
+      { c: toCanvas(applyFade(Br.img)), R: Rb, start: T.brush[0], dur: T.brush[1], ramp: .22 },
+      { c: toCanvas(applyFade(A)), R: Rw, start: T.wash[0], dur: T.wash[1], ramp: .22 },
+      { c: toCanvas(applyFade(Dp.img)), R: Rd, start: T.drop[0], dur: T.drop[1], ramp: .16 },
+      { c: toCanvas(applyFade(G)), R: Rg, start: T.glaze[0], dur: T.glaze[1], ramp: .12 }
+    ];
+    this.wetF = Dp.field;
+    this.qx = qx; this.qy = qy;
+    this.mask = document.createElement('canvas'); this.mask.width = qx; this.mask.height = qy;
+    this.mctx = this.mask.getContext('2d'); this.mimg = this.mctx.createImageData(qx, qy);
+    this.tmp = document.createElement('canvas'); this.tmp.width = w; this.tmp.height = h; this.tctx = this.tmp.getContext('2d');
+    const dpr = Math.min(DPR, 1.5); this.dpr = dpr;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    this.ctx = cv.getContext('2d'); this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const mk = () => { const c = document.createElement('canvas'); c.width = cv.width; c.height = cv.height; const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); return [c, x]; };
+    [this.pencil, this.pcx] = mk(); [this.penCv, this.pctx] = mk();
+
+    /* pencil: from the top, from the outside in; each line retraced once or twice */
+    let cxs = 0, cys = 0, cn = 0;
+    P.stems.forEach(st => st.forEach(p => { cxs += p[0]; cys += p[1]; cn++; }));
+    const CX = cxs / Math.max(1, cn), CY = cys / Math.max(1, cn);
+    const pr = rng(seed * 9), pn = makeNoise(seed * 9 + 1);
+    const orient = pts => {
+      let top = 0; pts.forEach((p, i) => { if (p[1] < pts[top][1]) top = i; });
+      const closed = pts.length > 8 && Math.hypot(pts[0][0] - pts[pts.length - 1][0], pts[0][1] - pts[pts.length - 1][1]) < 4;
+      if (closed) return pts.slice(top).concat(pts.slice(0, top + 1));
+      return pts[0][1] > pts[pts.length - 1][1] ? pts.slice().reverse() : pts;
+    };
+    const plines = [];
+    P.leaves.forEach((lf, i) => { if (i % 3 !== 1) plines.push({ pts: orient(lf.concat([lf[0]])), a: .17 }); });
+    P.stems.forEach(st => { if (st.length > 6) plines.push({ pts: orient(st.map(p => [p[0] + 2.5, p[1] - 2])), a: .15 }); });
+    P.dots.forEach(([x, y, R]) => { if (pr() < .7) plines.push({ pts: Array.from({ length: 16 }, (_, u) => [x + Math.cos(u * .42 - 1.57) * R * 1.1, y + Math.sin(u * .42 - 1.57) * R * 1.1]), a: .14 }); });
+    plines.forEach(l => {
+      const mid = l.pts[l.pts.length >> 1], top = Math.min(...l.pts.map(p => p[1]));
+      l.key = top - .55 * Math.hypot(mid[0] - CX, mid[1] - CY);
+    });
+    plines.sort((a, b) => a.key - b.key);
+    const samples = [];
+    plines.forEach(l => {
+      const passes = 1 + (pr() < .55 ? 1 : 0) + (pr() < .15 ? 1 : 0);
+      for (let pass = 0; pass < passes; pass++) {
+        const off = 2.2 * (pass + .5), from = pass ? pr() * .25 : 0, to = pass ? 1 - pr() * .3 : 1;
+        const n = l.pts.length;
+        for (let i = Math.floor(n * from) + 1; i < n * to; i++) {
+          const [x0, y0] = l.pts[i - 1], [x1, y1] = l.pts[i], L = Math.hypot(x1 - x0, y1 - y0);
+          for (let t = 0; t < L; t += .6) {
+            const x = x0 + (x1 - x0) * t / L, y = y0 + (y1 - y0) * t / L;
+            if (pn(x * .02 + pass * 9, y * .02) > .64) continue;
+            samples.push(x + (pn(x * .01 + pass * 5, y * .01) - .5) * off, y + (pn(x * .01, y * .01 + pass * 5) - .5) * off, l.a * (pass ? .75 : 1));
+          }
+        }
+      }
+    });
+    this.psamp = samples; this.pi = 0;
+
+    /* pigment line: loose, not quite on the wash; top-down; some contours drawn twice */
+    const q = [];
+    P.pen.concat(P.contours).forEach((g, i) => {
+      if (rng(seed + i)() > .75) return;
+      const pts = orient(g.pts); q.push({ pts, w: g.w, key: Math.min(...pts.map(p => p[1])) });
+      if (g.pts.length > 12 && rng(seed + i * 7)() < .3) { const a = Math.floor(pts.length * .2), b = Math.floor(pts.length * .8); q.push({ pts: pts.slice(a, b).map(p => [p[0] + 1.4, p[1] + .9]), w: g.w * .7, key: Math.min(...pts.map(p => p[1])) + 1 }); }
+    });
+    q.sort((a, b) => a.key - b.key);
+    this.penQueue = q; this.pg = 0; this.pj = 0;
+    yield;
+    this.placeNotes(MA, type, seed, pal);
+  };
+  Botanic.prototype.placeNotes = function (MA, type, seed, pal) {
+    const N = NOTES[type]; if (!N) return;
+    const W = this.W, H = this.H, sc = this.sc, w = this.w, r = rng(seed * 13);
+    const stemPts = []; this.P.stems.forEach(st => st.forEach((p, i) => { if (i % 6 === 0) stemPts.push(p); }));
+    const dens = (x, y, bw, bh) => { let s = 0, n = 0; for (let yy = y; yy < y + bh; yy += 8) for (let xx = x; xx < x + bw; xx += 8) { s += MA[clamp(Math.round(yy * sc), 0, this.h - 1) * w + clamp(Math.round(xx * sc), 0, w - 1)]; n++; } return s / Math.max(1, n); };
+    const near = (x, y) => { let d = 1e9; for (const p of stemPts) d = Math.min(d, Math.hypot(p[0] - x, p[1] - y)); return d; };
+    const boxes = [];
+    const place = (bw, bh) => {
+      let best = null, bs = 1e9;
+      for (let k = 0; k < 90; k++) {
+        const x = 20 + r() * Math.max(1, W - bw - 40), y = 20 + r() * Math.max(1, H - bh - 40);
+        if (this.fadeAt(x, y) < .95 || this.fadeAt(x + bw, y + bh) < .95) continue;
+        let s = dens(x, y, bw, bh) * 14 + Math.abs(near(x + bw / 2, y + bh / 2) - 60) / 40;
+        for (const b of boxes) if (x < b[0] + b[2] + 16 && x + bw + 16 > b[0] && y < b[1] + b[3] + 12 && y + bh + 12 > b[1]) s += 50;
+        if (s < bs) { bs = s; best = [x, y, bw, bh]; }
+      }
+      if (best) boxes.push(best);
+      return best;
+    };
+    whenFonts().then(() => {
+      const specs = [
+        { text: N.latin, font: '16px "Nothing You Could Do", "Segoe Script", cursive', kind: 'lead', rot: -.03 },
+        { text: N.zh, font: '12.5px "LXGW WenKai TC", "Kaiti TC", "STKaiti", serif', kind: 'lead', rot: .01 },
+        { text: `No. ${String(seed).padStart(2, '0')}  ${N.type}`, font: '10.5px "Special Elite", "Courier New", monospace', kind: 'type', rot: -.006 }
+      ];
+      const m = document.createElement('canvas').getContext('2d');
+      specs.forEach((s, idx) => {
+        m.font = s.font; const tw = Math.ceil(m.measureText(s.text).width) + 12, th = Math.ceil(parseFloat(s.font) * 1.9);
+        const b = place(tw, th); if (!b) return;
+        const note = this.rasterNote(s, b, pal);
+        note.start = s.kind === 'lead' ? this.T.pencil[0] + this.T.pencil[1] * (.55 + idx * .2) : 0;
+        note.dur = s.kind === 'lead' ? .9 + s.text.length * .03 : s.text.length * .075;
+        note.kind = s.kind;
+        this.notes.push(note);
+      });
+      if (this.ready && !this.started) this.render(0);
+    });
+  };
+  Botanic.prototype.rasterNote = function (s, [bx, by, bw, bh], pal) {
+    const dpr = this.dpr, c = document.createElement('canvas'); c.width = Math.ceil(bw * dpr); c.height = Math.ceil(bh * dpr);
+    const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.font = s.font; x.textBaseline = 'middle';
+    x.translate(6, bh / 2); x.rotate(s.rot);
+    const edges = [0];
+    if (s.kind === 'type') {
+      let cx = 0; const rr = rng(bx * 7 + by);
+      for (const ch of s.text) {
+        const a = rr() < .12 ? .95 : rr() < .15 ? .38 : .6 + rr() * .3;
+        x.fillStyle = `rgba(${pal.line},${a.toFixed(2)})`;
+        x.save(); x.translate(cx, (rr() - .5) * .7); x.rotate((rr() - .5) * .04); x.fillText(ch, 0, 0);
+        if (rr() < .18) { x.fillStyle = `rgba(${pal.line},.25)`; x.fillText(ch, .5, .3); }
+        x.restore();
+        cx += x.measureText(ch).width; edges.push(cx + 6);
+      }
+    } else { x.fillStyle = `rgba(${pal.lead},.62)`; x.fillText(s.text, 0, 0); }
+    const img = x.getImageData(0, 0, c.width, c.height), d = img.data, sh = this.sh;
+    for (let yy = 0; yy < c.height; yy++) for (let xx = 0; xx < c.width; xx++) {
+      const i = (yy * c.width + xx) * 4; if (!d[i + 3]) continue;
+      const t = sh.tooth(bx + xx / dpr, by + yy / dpr);
+      d[i + 3] *= s.kind === 'type' ? .62 + .5 * t : (t > .44 ? .55 + .7 * (t - .44) : .22);
+    }
+    x.setTransform(1, 0, 0, 1, 0, 0); x.putImageData(img, 0, 0);
+    return { c, x: bx, y: by, w: bw, h: bh, edges };
+  };
+  Botanic.prototype.wetAt = function (x, y) { return this.wetF[clamp(Math.round(y * this.sc), 0, this.h - 1) * this.w + clamp(Math.round(x * this.sc), 0, this.w - 1)]; };
+  Botanic.prototype.drawNote = function (ctx, n, t) {
+    const p = clamp((t - n.start) / n.dur, 0, 1); if (p <= 0) return false;
+    let ww = n.w * p;
+    if (n.kind === 'type') ww = n.edges[Math.min(n.edges.length - 1, Math.floor(p * (n.edges.length - 1)))];
+    if (ww > .5) ctx.drawImage(n.c, 0, 0, ww * this.dpr, n.c.height, n.x, n.y, ww, n.h);
+    return p < 1;
+  };
+  Botanic.prototype.render = function (t) {
+    const ctx = this.ctx, W = this.W, H = this.H;
+    let animating = false;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(this.pencil, 0, 0, W, H);
+    for (const n of this.notes) if (n.kind === 'lead' && this.drawNote(ctx, n, t)) animating = true;
+    ctx.globalCompositeOperation = 'multiply';
+    for (const L of this.layers) {
+      const p = (t - L.start) / L.dur;
+      if (p <= 0) { animating = true; continue; }
+      if (p >= 1 + L.ramp) { ctx.drawImage(L.c, 0, 0, W, H); continue; }
+      animating = true;
+      const d = this.mimg.data, R = L.R;
+      for (let i = 0; i < R.length; i++) d[i * 4 + 3] = 255 * smooth(clamp((p * (1 + L.ramp) - R[i]) / L.ramp, 0, 1));
+      this.mctx.putImageData(this.mimg, 0, 0);
+      const tc = this.tctx; tc.globalCompositeOperation = 'source-over'; tc.clearRect(0, 0, this.w, this.h);
+      tc.drawImage(L.c, 0, 0); tc.globalCompositeOperation = 'destination-in'; tc.imageSmoothingEnabled = true;
+      tc.drawImage(this.mask, 0, 0, this.w, this.h);
+      ctx.drawImage(this.tmp, 0, 0, W, H);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(this.penCv, 0, 0, W, H);
+    if (this.pg >= this.penQueue.length) {
+      if (this.typeT == null) this.typeT = t + .4;
+      for (const n of this.notes) if (n.kind === 'type') { n.start = this.typeT; if (this.drawNote(ctx, n, t)) animating = true; }
+    } else animating = true;
+    return animating;
+  };
+  Botanic.prototype.pencilTick = function (dt, all) {
+    const S = this.psamp; if (this.pi >= S.length) return false;
+    const n = all ? S.length : Math.ceil(S.length / 3 / this.T.pencil[1] * dt);
+    const end = Math.min(S.length, this.pi + n * 3);
+    for (; this.pi < end; this.pi += 3) { if (this.fadeAt(S[this.pi], S[this.pi + 1]) < .05) continue; graphite(this.pcx, this.sh, S[this.pi], S[this.pi + 1], S[this.pi + 2]); }
+    return this.pi < S.length;
+  };
+  Botanic.prototype.penTick = function (dt) {
+    if (this.pg >= this.penQueue.length) return false;
+    let budget = 240 * dt;
+    const col = this.pal.line;
+    while (budget > 0 && this.pg < this.penQueue.length) {
+      const g = this.penQueue[this.pg], pts = g.pts;
+      if (this.pj >= pts.length - 1) { this.pg++; this.pj = 0; continue; }
+      const [x0, y0] = pts[this.pj], [x1, y1] = pts[this.pj + 1], L = Math.hypot(x1 - x0, y1 - y0) || .1;
+      const q = this.pj / pts.length;
+      for (let s = 0; s < L; s += .45) {
+        const x = x0 + (x1 - x0) * s / L, y = y0 + (y1 - y0) * s / L;
+        const fd = this.fadeAt(x, y); if (fd < .05) continue;
+        inkDot(this.pctx, this.sh, x, y, g.w * .55 * (1 - q * .45) + .16, clamp(1 - q * .3, .4, 1) * fd, clamp(this.wetAt(x, y) * .55, 0, .6), col);
+      }
+      budget -= L; this.pj++;
+    }
+    return true;
+  };
+  Botanic.prototype.finish = function () {
+    this.pencilTick(0, true); let k = 0; while (this.penTick(.1) && k++ < 1e5);
+    this.typeT = 0; this.render(99); this.done = true;
+  };
+  Botanic.prototype.tick = function (dt) {
+    if (!this.started || this.done) return;
+    this.t += dt;
+    const pencil = this.pencilTick(dt);
+    const pen = this.t > this.T.pen ? this.penTick(dt) : true;
+    const anim = this.render(this.t);
+    if (!anim && !pencil && !pen) this.done = true;
+  };
+  const works = [];
+  const buildIO = new IntersectionObserver(es => es.forEach(e => { const b = e.target._bot; if (b && !b.ready && e.isIntersecting) b.build(); }), { rootMargin: '700px 0px' });
+  const startIO = new IntersectionObserver(es => es.forEach(e => {
+    const b = e.target._bot;
+    if (!b || !e.isIntersecting) return;
+    if (!b.ready) { b.build(); b.want = true; }
+    else if (!b.started) b.begin();
+  }), { threshold: .12 });
+  document.querySelectorAll('.botanic').forEach(cv => { const b = new Botanic(cv); cv._bot = b; works.push(b); buildIO.observe(cv); startIO.observe(cv); });
+
+  /* ================= textures for the paper surfaces (generated once) ================= */
+  (function textures() {
+    const S = 256, m = document.createElement('canvas'); m.width = m.height = S;
+    const mx = m.getContext('2d'), mi = mx.createImageData(S, S);
+    const o1 = periodic(71, 4, 4), o2 = periodic(72, 9, 9), o3 = periodic(73, 19, 19), o4 = periodic(74, 6, 6);
+    for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+      const v = o1(x / S * 4, y / S * 4) * .5 + o2(x / S * 9, y / S * 9) * .32 + o3(x / S * 19, y / S * 19) * .18, w = o4(x / S * 6 + 1.3, y / S * 6 + .7), i = (y * S + x) * 4;
+      if (v > .5) { mi.data[i] = 150; mi.data[i + 1] = 96; mi.data[i + 2] = 80; mi.data[i + 3] = Math.min(255, (v - .5) * 55 * (.6 + w)); }
+      else { mi.data[i] = 255; mi.data[i + 1] = 250; mi.data[i + 2] = 246; mi.data[i + 3] = Math.min(255, (.5 - v) * 60 * (.5 + w)); }
+    }
+    mx.putImageData(mi, 0, 0);
+    const F = 300, f = document.createElement('canvas'); f.width = f.height = F;
+    const fx = f.getContext('2d'), fi = fx.createImageData(F, F);
+    const a1 = periodic(81, 10, 40), a2 = periodic(82, 20, 90), a3 = periodic(83, 30, 30);
+    for (let y = 0; y < F; y++) for (let x = 0; x < F; x++) {
+      const v = a1(x / F * 10, y / F * 40) * .45 + a2(x / F * 20, y / F * 90) * .3 + a3(x / F * 30, y / F * 30) * .25, i = (y * F + x) * 4, d = v - .5;
+      if (d > 0) { fi.data[i] = 128; fi.data[i + 1] = 84; fi.data[i + 2] = 70; fi.data[i + 3] = Math.min(255, d * 30); }
+      else { fi.data[i] = 255; fi.data[i + 1] = 251; fi.data[i + 2] = 248; fi.data[i + 3] = Math.min(255, -d * 38); }
+    }
+    fx.putImageData(fi, 0, 0);
+    const c = document.createElement('canvas'); c.width = c.height = 520;
+    const x = c.getContext('2d'), r = rng(44);
+    for (let i = 0; i < 300; i++) {
+      const sx = r() * 520, sy = r() * 520, a = FA + (r() - .5) * 1.1, L = 14 + r() * 80, bend = (r() - .5) * .8, light = r() < .62;
+      x.strokeStyle = light ? `rgba(255,251,247,${(.18 + r() * .25).toFixed(2)})` : `rgba(120,78,62,${(.05 + r() * .06).toFixed(2)})`;
+      x.lineWidth = .35 + r() * .6;
+      x.beginPath(); x.moveTo(sx, sy); x.quadraticCurveTo(sx + Math.cos(a + bend) * L * .5, sy + Math.sin(a + bend) * L * .5, sx + Math.cos(a) * L, sy + Math.sin(a) * L); x.stroke();
+    }
+    const T = 300, tc = document.createElement('canvas'); tc.width = tc.height = T;
+    const tx = tc.getContext('2d'), ti = tx.createImageData(T, T), Hf = new Float32Array(T * T);
+    const h1 = periodic(91, 20, 20), h2 = periodic(92, 50, 50), h3 = periodic(93, 75, 75), h4 = periodic(94, 150, 150);
+    for (let y = 0; y < T; y++) for (let x = 0; x < T; x++) {
+      const u = x / T, v = y / T;
+      Hf[y * T + x] = h1(u * 20, v * 20) * .18 + h2(u * 50, v * 50) * .34 + Math.pow(h3(u * 75, v * 75), 1.5) * .34 + h4(u * 150, v * 150) * .14;
+    }
+    const LX = -.62, LY = -.78;
+    for (let y = 0; y < T; y++) for (let x = 0; x < T; x++) {
+      const gx = Hf[y * T + (x + 1) % T] - Hf[y * T + (x - 1 + T) % T], gy = Hf[((y + 1) % T) * T + x] - Hf[((y - 1 + T) % T) * T + x];
+      const sh = -(gx * LX + gy * LY) * 4, i = (y * T + x) * 4;
+      if (sh > 0) { ti.data[i] = 255; ti.data[i + 1] = 252; ti.data[i + 2] = 249; ti.data[i + 3] = Math.min(90, sh * 48); }
+      else { ti.data[i] = 96; ti.data[i + 1] = 62; ti.data[i + 2] = 50; ti.data[i + 3] = Math.min(60, -sh * 30); }
+    }
+    tx.putImageData(ti, 0, 0);
+    const emboss = (S2, octs, k, hiMax, loMax, seed) => {
+      const c2 = document.createElement('canvas'); c2.width = c2.height = S2;
+      const x2 = c2.getContext('2d'), im = x2.createImageData(S2, S2), Hh = new Float32Array(S2 * S2);
+      const fns = octs.map(([p, w2], j) => [periodic(seed + j, p, p), p, w2]);
+      for (let y = 0; y < S2; y++) for (let x = 0; x < S2; x++) { let v = 0; for (const [f, p, w2] of fns) v += f(x / S2 * p, y / S2 * p) * w2; Hh[y * S2 + x] = v; }
+      for (let y = 0; y < S2; y++) for (let x = 0; x < S2; x++) {
+        const gx = Hh[y * S2 + (x + 1) % S2] - Hh[y * S2 + (x - 1 + S2) % S2], gy = Hh[((y + 1) % S2) * S2 + x] - Hh[((y - 1 + S2) % S2) * S2 + x];
+        const sh = -(gx * LX + gy * LY) * k, i = (y * S2 + x) * 4;
+        if (sh > 0) { im.data[i] = 255; im.data[i + 1] = 252; im.data[i + 2] = 249; im.data[i + 3] = Math.min(hiMax, sh * 60); }
+        else { im.data[i] = 96; im.data[i + 1] = 62; im.data[i + 2] = 50; im.data[i + 3] = Math.min(loMax, -sh * 40); }
+      }
+      x2.putImageData(im, 0, 0); return c2.toDataURL();
+    };
+    const fine = emboss(240, [[60, .45], [120, .4], [240, .15]], 2.2, 40, 26, 301);
+    const L2 = 320, lc = document.createElement('canvas'); lc.width = lc.height = L2;
+    const lx = lc.getContext('2d'), li = lx.createImageData(L2, L2), wob = periodic(401, 8, 8), ln = periodic(402, 40, 40);
+    for (let y = 0; y < L2; y++) for (let x = 0; x < L2; x++) {
+      const yy = y + (wob(x / L2 * 8, y / L2 * 8) - .5) * 1.2;
+      const laid = Math.sin(yy / L2 * Math.PI * 2 * 100) * (.7 + .3 * ln(x / L2 * 40, y / L2 * 40));
+      const cx2 = (x % 80) - 40, chain = Math.exp(-(cx2 * cx2) / 2.2);
+      const i = (y * L2 + x) * 4;
+      if (laid > 0) { li.data[i] = 255; li.data[i + 1] = 252; li.data[i + 2] = 248; li.data[i + 3] = laid * 26; }
+      else { li.data[i] = 110; li.data[i + 1] = 72; li.data[i + 2] = 60; li.data[i + 3] = -laid * 16 + chain * 22; }
+      if (chain > .3 && laid > 0) { li.data[i] = 120; li.data[i + 1] = 80; li.data[i + 2] = 66; li.data[i + 3] = chain * 22; }
+    }
+    lx.putImageData(li, 0, 0);
+    const root = document.documentElement.style;
+    root.setProperty('--tooth-fine', `url(${fine})`);
+    root.setProperty('--laid', `url(${lc.toDataURL()})`);
+    root.setProperty('--tooth', `url(${tc.toDataURL()})`);
+    root.setProperty('--mottle', `url(${m.toDataURL()})`);
+    root.setProperty('--fiber-tex', `url(${f.toDataURL()})`);
+    root.setProperty('--hairs', `url(${c.toDataURL()})`);
+  })();
+
+  /* ================= torn edges: multi-scale, one seed per edge ================= */
+  function edgeOffsets(len, amp, seed, style, rimK = 1) {
+    const n = Math.ceil(len / 2) + 1, out = new Float32Array(n), rim = new Float32Array(n), fiberAt = [];
+    const L = makeNoise(seed), M = makeNoise(seed + 1), Hn = makeNoise(seed + 2), E = makeNoise(seed + 3), E2 = makeNoise(seed + 4), R = makeNoise(seed + 5), r = rng(seed + 6);
+    const tears = [], deckle = style === 'deckle', cut = style === 'cut';
+    let tcount = deckle || cut ? 0 : Math.floor(len / 520 + r() * .9);
+    while (tcount-- > 0) tears.push({ c: 30 + r() * (len - 60), w: 10 + r() * 34, d: amp * (1.5 + r() * 1.6), skew: r() < .5 ? 1.5 : .7 });
+    for (let j = 0; j < n; j++) {
+      const t = j * 2;
+      const env = smooth(clamp((E(t / 150) - .38) * 2.4, 0, 1));
+      const fib = smooth(clamp((E2(t / 55) - .56) * 3.2, 0, 1));
+      let d = cut ? .15 + (M(t / 60) - .5) * .5 + (Hn(t / 3) - .5) * .25 : deckle
+        ? amp * (.35 + .25 * L(t / 200)) + (M(t / 11) - .5) * amp * .55 + (Hn(t / 2.4) - .5) * amp * .45 + (E(t / 40) - .5) * amp * .35
+        : amp * (.28 + .32 * L(t / 300)) + env * amp * .5 * (M(t / 24) - .5) * 2 + fib * amp * .3 * (Hn(t / 2.1) - .5) * 2;
+      let inTear = 0;
+      for (const tr of tears) {
+        let u = (t - tr.c) / tr.w; if (u < 0) u *= tr.skew;
+        if (u > -1 && u < 1) { const s = Math.pow(1 - u * u, .7) * (1 + .3 * (Hn(t / 2.6 + 99) - .5) * 2); d += tr.d * s; inTear = Math.max(inTear, s); }
+      }
+      out[j] = Math.max(0, d);
+      rim[j] = cut ? 0 : deckle ? Math.max(0, R(t / 20) - .55) * 2.2 : rimK * (1 + Math.max(0, R(t / 34) - .3) * 7 + inTear * 3.8 + fib * 1.4 + (Hn(t / 1.3 + 7) - .5) * 1.2);
+      if (!cut && (deckle ? r() < .11 * rimK : ((fib > .45 || inTear > .3) && r() < .07 * rimK))) fiberAt.push(j);
+    }
+    return { out, rim, fiberAt };
+  }
+  function tearSheet(el, w, h, amp, seed, edges, style, rimK) {
+    const face = [], core = [], fibers = [];
+    const sides = [
+      [w, (i, d) => [i, d], 't', [0, -1]], [h, (i, d) => [w - d, i], 'r', [1, 0]],
+      [w, (i, d) => [w - i, h - d], 'b', [0, 1]], [h, (i, d) => [d, h - i], 'l', [-1, 0]]
+    ];
+    sides.forEach(([len, fn, key, nrm], si) => {
+      const torn = edges.includes(key), n = Math.ceil(len / 2) + 1;
+      const E = torn ? edgeOffsets(len, amp, seed * 4 + si * 1013, style, rimK) : null;
+      for (let j = 0; j < n; j++) {
+        const i = Math.min(j * 2, len), d = torn ? E.out[j] : 0, rm = torn ? E.rim[j] : 0;
+        face.push(fn(i, d)); core.push(fn(i, Math.max(0, d - rm)));
+      }
+      if (torn) for (const j of E.fiberAt) { const [x, y] = fn(Math.min(j * 2, len), Math.max(0, E.out[j] - E.rim[j])); fibers.push([x, y, nrm]); }
+    });
+    const poly = pts => 'polygon(' + pts.map(p => p[0].toFixed(1) + 'px ' + p[1].toFixed(1) + 'px').join(',') + ')';
+    return { face: poly(face), core: poly(core), fibers, facePts: face };
+  }
+  /* per-sheet static surface: deckle translucency, age at the edges, foxing, the light across a curl */
+  function paperFX(S, pts, w, h, style, seed) {
+    const sc = .5, W2 = Math.max(2, Math.ceil(w * sc)), H2 = Math.max(2, Math.ceil(h * sc)), r = rng(seed + 55);
+    const mc = document.createElement('canvas'); mc.width = W2; mc.height = H2;
+    const mx = mc.getContext('2d'); mx.scale(sc, sc); mx.beginPath(); pts.forEach(([x, y], i) => i ? mx.lineTo(x, y) : mx.moveTo(x, y)); mx.closePath(); mx.fill();
+    const md = mx.getImageData(0, 0, W2, H2).data, M = new Float32Array(W2 * H2);
+    for (let i = 0; i < M.length; i++) M[i] = md[i * 4 + 3] / 255;
+    const b1 = blur2(M, W2, H2, Math.max(1, Math.round(4 * sc))), b2 = blur2(M, W2, H2, Math.max(2, Math.round(26 * sc)));
+    const deckle = style === 'deckle', aged = r() < .22, n = makeNoise(seed + 77), n2 = makeNoise(seed + 78);
+    const spots = []; const ns = aged ? 1 + (r() * 3 | 0) : (r() < .15 ? 1 : 0);
+    for (let k = 0; k < ns; k++) spots.push([r() * W2, r() * H2, (1 + r() * 4) * sc, .06 + r() * .12]);
+    const ca = r() * 6.2832, cx = Math.cos(ca), cy = Math.sin(ca), curlK = .04 + r() * .05, curlC = .3 + r() * .4;
+    const img = new ImageData(W2, H2), D = img.data;
+    for (let y = 0; y < H2; y++) for (let x = 0; x < W2; x++) {
+      const i = y * W2 + x, m = M[i];
+      if (m <= 0) continue;
+      const X = x / sc, Y = y / sc;
+      const e1 = clamp((1 - b1[i]) * 2.2, 0, 1) * m, e2 = clamp((1 - b2[i]) * 1.7, 0, 1) * m;
+      let aw = 0, ab = 0, warm = 0;
+      if (deckle) aw += Math.pow(e1, 1.3) * (.45 + .35 * n(X / 6, Y / 6)) + Math.pow(e2, 2.2) * .12;
+      else aw += Math.pow(e1, 2) * .1;
+      if (aged) warm += Math.pow(e2, 1.8) * (.05 + .12 * n2(X / 70, Y / 70)) + Math.pow(e1, 1.4) * .03;
+      for (const [sx, sy, sr, sa] of spots) { const d2 = ((x - sx) ** 2 + (y - sy) ** 2) / (sr * sr); if (d2 < 9) { warm += sa * Math.exp(-d2) + sa * .35 * Math.exp(-d2 / 4); } }
+
+      ab = clamp(ab + warm, 0, .6); aw = clamp(aw, 0, .8);
+      const A = aw + ab * (1 - aw);
+      if (A <= .002) continue;
+      const wf = warm / Math.max(.0001, ab + .0001), br = [lerp(96, 168, wf), lerp(64, 118, wf), lerp(52, 66, wf)];
+      D[i * 4] = (255 * aw + br[0] * ab * (1 - aw)) / A; D[i * 4 + 1] = (251 * aw + br[1] * ab * (1 - aw)) / A; D[i * 4 + 2] = (247 * aw + br[2] * ab * (1 - aw)) / A; D[i * 4 + 3] = A * 255 * m;
+    }
+    let cv = S.fx;
+    if (!cv) { cv = document.createElement('canvas'); cv.className = 'paperfx'; cv.setAttribute('aria-hidden', 'true'); S.face.after(cv); S.fx = cv; }
+    cv.width = W2; cv.height = H2; cv.getContext('2d').putImageData(img, 0, 0);
+  }
+
+  /* sheets resting under other sheets */
+  document.querySelectorAll('[data-stack]').forEach((el, i) => {
+    const r = rng(4000 + i * 37), tones = ['t-cotton', 't-shell', 't-blush', 't-ivory'];
+    for (let k = +el.dataset.stack; k > 0; k--) {
+      const u = document.createElement('div');
+      const mats = [['m-cotton', 'deckle'], ['m-card', 'cut'], ['m-writing', 'torn'], ['m-cotton', 'torn']], [mt, st] = mats[(r() * mats.length) | 0];
+      u.className = 'scrap under ' + mt + ' ' + tones[(r() * tones.length) | 0];
+      u.dataset.amp = el.dataset.amp || 8; u.dataset.style = st;
+      u.setAttribute('aria-hidden', 'true');
+      const dx = (r() - .5) * 18 * k, dy = (4 + r() * 8) * k, rot = (r() - .5) * 3.2 * k;
+      u.style.cssText = `position:absolute;inset:0;z-index:-1;transform:translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) rotate(${rot.toFixed(2)}deg);--lift:${(.35 + r() * .3).toFixed(2)}`;
+      el.prepend(u);
+    }
+  });
+
+  /* one light, upper left: the higher a sheet sits, the farther, softer and fainter its shadow */
+  const RIMK = { 'm-writing': .4, 'm-card': .3, 'm-cotton': 1.1, 'm-laid': .8 };
+  function shadowFor(L) {
+    const contactA = clamp(.42 - L * .45, .08, .42), contactB = (.35 + L * 1.2).toFixed(2);
+    const ox = (.6 + L * 10).toFixed(1), oy = (1 + L * 14).toFixed(1), blur = (.6 + L * L * 22 + L * 3).toFixed(1), a = clamp(.24 - L * .12, .07, .24).toFixed(3);
+    let f = `drop-shadow(0 0 ${contactB}px rgba(78,48,38,${contactA.toFixed(3)})) drop-shadow(${ox}px ${oy}px ${blur}px rgba(78,48,38,${a}))`;
+    if (L > .3) f += ` drop-shadow(${(L * 4).toFixed(1)}px ${(L * 10).toFixed(1)}px ${(L * 40).toFixed(1)}px rgba(78,48,38,.05))`;
+    return f;
+  }
+  const NS = 'http://www.w3.org/2000/svg';
+  const sheets = [];
+  document.querySelectorAll('.scrap').forEach((el, i) => {
+    const edge = document.createElement('div'); edge.className = 'edge';
+    const face = document.createElement('div'); face.className = 'face';
+    el.prepend(face); el.prepend(edge);
+    const r = rng(900 + i * 17);
+    el.style.setProperty('--bx', (r() * 800 | 0) + 'px'); el.style.setProperty('--by', (r() * 800 | 0) + 'px');
+    const nested = el.parentElement && el.parentElement.closest('.scrap');
+    const lift = el.dataset.lift ? +el.dataset.lift : el.classList.contains('under') ? .06 + r() * .06 : nested ? .05 : .3 + r() * .3;
+    if (!el.classList.contains('vellum')) el.style.filter = shadowFor(lift);
+    edge.style.translate = `${((r() - .5) * 1.6).toFixed(2)}px ${((r() - .5) * 1.6).toFixed(2)}px`;
+    const fringe = document.createElementNS(NS, 'svg'); fringe.setAttribute('class', 'fringe'); fringe.setAttribute('aria-hidden', 'true');
+    face.after(fringe);
+    const S = { el, face, edge, fringe, canvas: null, ctx: null, sheet: new Sheet(r() * 5000, r() * 5000), seed: 97 + i * 131 + (r() * 1e5 | 0), clip: '', w: 0, h: 0 };
+    el._sheet = S; sheets.push(S);
+    const amp = +(el.dataset.amp || 8) * .8, edges = el.dataset.edges || 'trbl', style = el.dataset.style || 'torn';
+    const mat = ['m-writing', 'm-card', 'm-cotton', 'm-laid'].find(c => el.classList.contains(c)) || 'm-card';
+    if (!el.className.includes('m-')) el.classList.add('m-card');
+    const draw = () => {
+      const w = el.offsetWidth, h = el.offsetHeight;
+      if (!w || !h || (Math.abs(w - S.w) < 1 && Math.abs(h - S.h) < 1)) return;
+      S.w = w; S.h = h;
+      const t = tearSheet(el, w, h, amp, S.seed, edges, style, RIMK[mat] || 1);
+      face.style.clipPath = t.face; edge.style.clipPath = t.core; S.clip = t.face;
+      if (!el.classList.contains('vellum')) { paperFX(S, t.facePts, w, h, style, S.seed); S.fx.style.clipPath = t.face; }
+      el.querySelectorAll(':scope > canvas.botanic').forEach(c => c.style.clipPath = t.face);
+      if (S.canvas) { S.canvas.style.clipPath = t.face; resizeInk(S); }
+      fringe.setAttribute('width', w + 16); fringe.setAttribute('height', h + 16);
+      const fr = rng(S.seed + 3);
+      fringe.innerHTML = t.fibers.map(([x, y, [nx, ny]]) => {
+        const L = 2 + fr() * 6, bend = (fr() - .5) * 4, tx = -ny, ty = nx;
+        const ex = x + nx * L + tx * bend, ey = y + ny * L + ty * bend;
+        return `<path d="M${(x + 8).toFixed(1)} ${(y + 8).toFixed(1)} Q${(x + 8 + nx * L * .5 + tx * bend * .2).toFixed(1)} ${(y + 8 + ny * L * .5 + ty * bend * .2).toFixed(1)} ${(ex + 8).toFixed(1)} ${(ey + 8).toFixed(1)}" stroke="rgba(255,250,246,${(.5 + fr() * .4).toFixed(2)})" stroke-width="${(.35 + fr() * .4).toFixed(2)}" fill="none" stroke-linecap="round"/>`;
+      }).join('');
+    };
+    draw(); new ResizeObserver(draw).observe(el);
+  });
+
+  /* ================= ink targets: each sheet, and the ground beneath ================= */
+  function ensureInk(S) {
+    if (S.canvas) return S.ctx;
+    const cv = document.createElement('canvas'); cv.className = 'ink'; cv.setAttribute('aria-hidden', 'true');
+    cv.style.clipPath = S.clip;
+    S.fringe.after(cv);
+    S.canvas = cv; resizeInk(S);
+    return S.ctx;
+  }
+  function resizeInk(S) {
+    const old = S.canvas.width ? S.canvas : null, w = S.el.offsetWidth, h = S.el.offsetHeight;
+    let snap = null;
+    if (old && old.width) { snap = document.createElement('canvas'); snap.width = old.width; snap.height = old.height; snap.getContext('2d').drawImage(old, 0, 0); }
+    S.canvas.width = Math.round(w * DPR); S.canvas.height = Math.round(h * DPR);
+    S.ctx = S.canvas.getContext('2d'); S.ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    if (snap) S.ctx.drawImage(snap, 0, 0, snap.width / DPR, snap.height / DPR);
+  }
+  const main = document.getElementById('main');
+  const ground = { chunks: new Map(), sheet: new Sheet(3333, 7777) };
+  const CH = 1024;
+  function groundCtx(y) {
+    const k = Math.floor(y / CH);
+    let c = ground.chunks.get(k);
+    if (!c) {
+      const cv = document.createElement('canvas'); cv.className = 'ground-ink'; cv.setAttribute('aria-hidden', 'true');
+      const w = main.offsetWidth;
+      cv.style.top = k * CH + 'px'; cv.style.width = w + 'px'; cv.style.height = CH + 'px';
+      cv.width = Math.round(w * DPR); cv.height = Math.round(CH * DPR);
+      main.prepend(cv);
+      c = { cv, ctx: cv.getContext('2d'), k };
+      c.ctx.setTransform(DPR, 0, 0, DPR, 0, -k * CH * DPR);
+      ground.chunks.set(k, c);
+    }
+    return c.ctx;
+  }
+  function clearGround() { ground.chunks.forEach(c => c.cv.remove()); ground.chunks.clear(); }
+
+  function localFrame(S) {
+    let ang = 0, sc = 1;
+    for (let n = S.el; n && n !== document.body; n = n.parentElement) {
+      const t = getComputedStyle(n).transform;
+      if (t && t !== 'none') { const m = new DOMMatrixReadOnly(t); ang += Math.atan2(m.b, m.a); sc *= Math.hypot(m.a, m.b); }
+    }
+    const r = S.el.getBoundingClientRect();
+    return { cx: r.left + r.width / 2, cy: r.top + r.height / 2, c: Math.cos(-ang), s: Math.sin(-ang), sc, w: S.el.offsetWidth, h: S.el.offsetHeight };
+  }
+  const toLocal = (F, x, y) => { const dx = x - F.cx, dy = y - F.cy; return [(dx * F.c - dy * F.s) / F.sc + F.w / 2, (dx * F.s + dy * F.c) / F.sc + F.h / 2]; };
+  function targetAt(x, y) {
+    const hit = document.elementsFromPoint(x, y)[0];
+    if (!hit) return null;
+    const sc = hit.closest && hit.closest('.scrap');
+    if (sc && sc._sheet) { const S = sc._sheet, F = localFrame(S); return { kind: 'sheet', S, F, key: S }; }
+    if (main.contains(hit) || hit === main || hit === document.body || hit === document.documentElement) {
+      const mr = main.getBoundingClientRect();
+      return { kind: 'ground', ox: mr.left, oy: mr.top, key: ground };
+    }
+    return null;
+  }
+  function paint(T, x, y, fn) {
+    if (T.kind === 'sheet') { const [lx, ly] = toLocal(T.F, x, y); fn(ensureInk(T.S), T.S.sheet, lx, ly); }
+    else { const lx = x - T.ox, ly = y - T.oy; if (lx < 0) return; fn(groundCtx(ly), ground.sheet, lx, ly); }
+  }
+
+  /* ================= the cursor is a pen ================= */
+  let last = null, down = false, lastMove = 0, idleStage = 0, spread = 0, v = 0, T = null;
+  function move(e) {
+    if (e.pointerType === 'touch' && !down) { last = null; return; }
+    const now = performance.now(), x = e.clientX, y = e.clientY;
+    const T2 = targetAt(x, y);
+    if (last && T2) {
+      const dx = x - last.x, dy = y - last.y, d = Math.hypot(dx, dy), dt = Math.max(8, now - lastMove);
+      v = v * .7 + (d / dt) * .3;
+      const T1 = last.T && last.T.key === T2.key ? last.T : T2;
+      const steps = Math.max(1, Math.ceil(d / .8));
+      const r0 = clamp(.9 - v * .35, .28, .9) * (down ? 1.5 : 1);
+      const dens = clamp(.55 - v * .22, .08, .55) * (down ? 1.25 : 1);
+      const wet = down ? .7 : clamp(.26 - v * .22, 0, .26);
+      const skip = clamp(v * .3 - .08, 0, .75);
+      for (let i = 0; i < steps; i++) {
+        if (Math.random() < skip) continue;
+        const t = i / steps, px = last.x + dx * t, py = last.y + dy * t, TT = t < .5 ? T1 : T2;
+        paint(TT, px, py, (ctx, sh, lx, ly) => inkDot(ctx, sh, lx, ly, r0 * (.8 + Math.random() * .4), dens, wet));
+      }
+      if (d > 2) { idleStage = 0; spread = 0; }
+    }
+    last = { x, y, T: T2 }; T = T2; lastMove = now;
+  }
+  function idle(now) {
+    if (!last || !last.T || reduce) return;
+    const dt = now - lastMove;
+    if (down) {
+      spread = Math.min(15, spread + .1 + spread * .005);
+      if (Math.random() < .7) { const a = Math.random() * 6.28, d = Math.random() * spread * .45; paint(last.T, last.x + Math.cos(a) * d, last.y + Math.sin(a) * d, (ctx, sh, lx, ly) => inkDot(ctx, sh, lx, ly, .8 + spread * .12, .25, .95)); }
+      return;
+    }
+    if (idleStage === 0 && dt > 240 && v < .8) { paint(last.T, last.x, last.y, (ctx, sh, lx, ly) => inkBlot(ctx, sh, lx, ly, 1 + Math.random() * .5, .3)); idleStage = 1; }
+    else if (idleStage === 1 && dt > 1200) { paint(last.T, last.x, last.y, (ctx, sh, lx, ly) => inkBlot(ctx, sh, lx, ly, 1.7 + Math.random() * .7, .55)); idleStage = 2; }
+  }
+  if (!reduce) {
+    addEventListener('pointermove', move, { passive: true });
+    addEventListener('pointerdown', e => { down = true; spread = 0; lastMove = performance.now(); const Tg = targetAt(e.clientX, e.clientY); last = { x: e.clientX, y: e.clientY, T: Tg }; if (Tg) paint(Tg, e.clientX, e.clientY, (ctx, sh, lx, ly) => inkBlot(ctx, sh, lx, ly, 1.3, .8)); });
+    addEventListener('pointerup', () => { down = false; });
+    document.addEventListener('pointerleave', () => { last = null; });
+    addEventListener('scroll', () => { last = null; }, { passive: true });
+  }
+
+  /* ================= reveal, parallax, views ================= */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1, rootMargin: '0px 0px -5% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  function para() {
+    if (reduce) return;
+    const vh = innerHeight;
+    document.querySelectorAll('.view:not([hidden]) .para').forEach(el => { const r = el.parentElement.getBoundingClientRect(), c = r.top + r.height / 2 - vh / 2; el.style.translate = `0 ${(-c * +el.dataset.speed).toFixed(1)}px`; });
+  }
+  let ticking = false;
+  addEventListener('scroll', () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { para(); ticking = false; }); }, { passive: true });
+  addEventListener('resize', () => { para(); });
+
+  const views = {}; document.querySelectorAll('.view').forEach(v => views[v.dataset.view] = v);
+  const side = document.getElementById('side'), btn = document.getElementById('menuBtn');
+  let current = null;
+  function show() {
+    let v = location.hash.slice(1) || 'home', target = null;
+    if (v.startsWith('w-')) { target = v; v = 'works'; }
+    if (!views[v]) v = 'home';
+    const changed = v !== current; current = v;
+    Object.entries(views).forEach(([k, el]) => el.hidden = k !== v);
+    document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === v));
+    side.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+    requestAnimationFrame(() => {
+      if (target) { const el = document.getElementById(target); if (el) { if (el.classList.contains('reveal')) el.classList.add('in'); el.querySelectorAll('.reveal').forEach(r => r.classList.add('in')); el.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' }); } }
+      else if (changed) scrollTo(0, 0);
+      if (changed) clearGround();
+      para();
+    });
+  }
+  addEventListener('hashchange', show);
+  btn.addEventListener('click', () => { const o = side.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+
+  let lastT = performance.now();
+  function loop(now) {
+    const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
+    const job = works.find(b => b.job && b.cv.offsetParent); if (job) job.step();
+    for (const b of works) if (b.started && !b.done && b.cv.offsetParent) b.tick(dt);
+    idle(now);
+    requestAnimationFrame(loop);
+  }
+  function boot() { show(); requestAnimationFrame(loop); }
+  if (document.readyState === 'complete') boot(); else addEventListener('load', boot, { once: true });
+})();
+</script>
+
+</body>
+</html>
