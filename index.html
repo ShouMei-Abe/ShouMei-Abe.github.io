@@ -144,6 +144,8 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .plate svg, .mini svg { height: auto; overflow: visible; }
 .plate svg { width: 56%; position: relative; }
 .sketch path { fill: none; stroke: var(--ink-soft); stroke-width: 1; stroke-linecap: round; opacity: .6; }
+.plate.video { aspect-ratio: 16 / 9; display: block; padding: 0; }
+.plate.video iframe { width: 100%; height: 100%; border: 0; display: block; }
 .plate small { position: absolute; bottom: 10px; right: 14px; font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 13px; }
 
 /* works */
@@ -230,7 +232,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
       <a href="#home" data-nav="home">Home <span>首頁</span></a>
       <a href="#works" data-nav="works">Works <span>作品</span></a>
       <ul class="side-works">
-        <li><a href="#w-wedding">婚禮儀式<span class="yr">2025</span></a></li>
+        <li><a href="#w-wedding">To/gether - 在與一起<span class="yr">2025</span></a></li>
         <li><a href="#w-cube">驚喜立方體<span class="yr">2026</span></a></li>
         <li><a href="#w-drawing">素描</a></li>
         <li><a href="#w-oil">油畫</a></li>
@@ -279,8 +281,8 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
           <h3>Selected works</h3>
           <div class="sel-grid">
             <a href="#w-wedding">
-              <div class="mini scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".06"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M20 100 C60 40 90 30 100 60 S140 90 180 20"/><path d="M100 60 C104 44 112 36 126 32"/></svg></div>
-              <b>婚禮儀式</b><i>performance, 90 min</i>
+              <div class="mini scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".06" style="aspect-ratio:1820/1312"><img src="img/together-invite.jpg" alt="〈To/gether - 在與一起〉婚禮邀請函" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+              <b>To/gether - 在與一起</b><i>performance, 32 min</i>
             </a>
             <a href="#w-cube">
               <div class="mini scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".06"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M70 34 L130 34 L130 94 L70 94 Z"/><path d="M70 34 L90 20 L150 20 L130 34"/><path d="M130 94 L150 80 L150 20"/></svg></div>
@@ -308,13 +310,13 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
     <div class="works">
       <article class="work w-feature bleed-r" id="w-wedding">
         <div class="plate-wrap scrap m-cotton t-cotton reveal para" data-speed=".05" data-amp="7" data-edges="tlb" data-style="deckle" data-lift=".28">
-          <div class="plate scrap m-card t-blush" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M20 100 C60 40 90 30 100 60 S140 90 180 20"/><path d="M100 60 C104 44 112 36 126 32"/><path d="M60 72 C54 60 46 54 34 52"/></svg><small>儀式現場照片</small></div>
+          <div class="plate video scrap m-card t-blush" data-amp="4" data-style="cut" data-lift=".05"><iframe src="https://www.youtube.com/embed/O-7qbPlI_0w" title="To/gether - 在與一起" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
         </div>
         <div class="caption scrap vellum reveal para" data-speed="-.08" data-amp="6">
-          <span class="tagline">Performance · 90 min · 2025</span>
-          <h3>婚禮儀式（作品名）</h3>
-          <p class="meta">行為藝術，完整影像附章節時間點</p>
-          <p>作品說明放這裡。兩三句話，讓人知道這場儀式在做什麼，為什麼是婚禮。</p>
+          <span class="tagline">Performance · 32 min · 2025</span>
+          <h3 style="white-space:nowrap">〈To/gether - 在與一起〉</h3>
+          <p class="meta">非典型婚禮行為藝術計畫</p>
+          <p>以婚禮儀式為形式的行為藝術。完整影像於上方播放。（說明文字待你確認）</p>
         </div>
       </article>
 
