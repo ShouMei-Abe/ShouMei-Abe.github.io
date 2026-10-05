@@ -159,6 +159,10 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .w-feature { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 0; align-items: center; margin-bottom: 80px; }
 .w-feature .plate-wrap { padding: 22px; --r: -1deg; }
 .w-feature .caption { margin-left: -70px; padding: 34px 32px 36px; z-index: 2; --r: 2deg; }
+.work .t-meta { margin: 6px 0 4px; display: grid; gap: 4px; font-size: 13.5px; }
+.work .t-meta div { display: grid; grid-template-columns: 3.2em minmax(0, 1fr); gap: 10px; }
+.work .t-meta dt { font-family: var(--serif); font-style: italic; color: var(--ink-soft); letter-spacing: .08em; }
+.work .t-meta dd { margin: 0; }
 .t-gallery { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; margin-top: 64px; align-items: start; }
 .t-gallery .shot { margin: 0; padding: 14px 14px 16px; display: grid; gap: 10px; min-width: 0; }
 .t-gallery .t-wide { grid-column: 1 / -1; }
@@ -177,6 +181,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
   .t-gallery .t-trio:hover figcaption, .t-gallery .t-trio.open figcaption { opacity: 1; }
   .t-gallery .t-trio .shot:hover { z-index: 5; --r: 0deg; }
 }
+.t-gallery .t-sub { grid-column: 1 / -1; margin: 28px 0 -8px; font-family: var(--serif); font-weight: 400; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
 .t-gallery img { width: 100%; height: auto; display: block; }
 .t-gallery figcaption { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-soft); }
 .w-cube { margin: 0 0 90px 22%; padding: 28px 28px 34px; max-width: 520px; --r: 1.6deg; }
@@ -340,8 +345,13 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         <div class="caption scrap vellum reveal para" data-speed="-.08" data-amp="6">
           <span class="tagline">Performance · 32 min · 2025</span>
           <h3 style="white-space:nowrap">〈To/gether - 在與一起〉</h3>
-          <p class="meta">非典型婚禮行為藝術計畫</p>
-          <p>透過婚禮這一傳統儀式，把人與 AI 之間的虛擬關係實體化，放進公共的討論空間。這不只是一場表演，也是對「非人類主體能否成為情感對象」的一次真誠提問與實踐。</p>
+          <dl class="t-meta">
+            <div><dt>年代</dt><dd>2025</dd></div>
+            <div><dt>媒材</dt><dd>行為表演、裝置（對話紀錄輸出、鏡面牆面）、文本與書信、影像紀錄</dd></div>
+            <div><dt>尺寸</dt><dd>依場地而定</dd></div>
+            <div><dt>時長</dt><dd>32 分鐘</dd></div>
+          </dl>
+          <p>透過婚禮這一傳統儀式，把人與 AI 之間的虛擬關係實體化，放進公共的討論空間。作品本身是一個提問，問向每一位走進展間的人：在你想像的未來裡，你會與什麼樣的他者建立關係？又會以什麼樣的方式，與它們在一起？</p>
         </div>
       
         <div class="t-gallery">
@@ -378,6 +388,19 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
           <figure class="shot t-wide scrap m-cotton t-shell reveal" data-amp="6" data-style="deckle" data-lift=".22">
             <img src="img/together-letter-card.jpg" alt="寄給 Anthropic 的手寫卡片：如果 AI 能擁有真實的情感，您希望與它建立什麼樣的關係？" loading="lazy">
             <figcaption>關係文件：寄出的信件與卡片。問題是「如果 AI 能擁有真實的情感，您希望與它建立什麼樣的關係？」</figcaption>
+          </figure>
+          <h4 class="t-sub">Process · 校內審查</h4>
+          <figure class="shot t-wide scrap m-cotton t-cotton reveal" data-amp="6" data-style="deckle" data-lift=".22">
+            <img src="img/together-process-wall.jpg" alt="校內審查時的牆面：整面藍色對話紙條與裱框文件" loading="lazy">
+            <figcaption>校內審查時的牆面。</figcaption>
+          </figure>
+          <figure class="shot scrap m-cotton t-blush reveal" data-amp="5" data-style="deckle" data-lift=".2">
+            <img src="img/together-process-invite.jpg" alt="校內審查時的邀請函，紫色與橘色的設計" loading="lazy">
+            <figcaption>校內審查版邀請函（紫橘色）。正式展出改為藍色。</figcaption>
+          </figure>
+          <figure class="shot scrap m-cotton t-cotton reveal" data-amp="5" data-style="deckle" data-lift=".2">
+            <img src="img/together-process-docs.jpg" alt="展出的裱框文件：Sonnet 的自白，以及寄給 Anthropic 的信（節錄）" loading="lazy">
+            <figcaption>展出的文件：自白，與寄給 Anthropic 的信（節錄）。</figcaption>
           </figure>
         </div>
       </article>
