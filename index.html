@@ -35,7 +35,7 @@
   --paper-size: 300px 300px, 520px 520px, 190px 190px, 300px 300px, 1180px 1180px;
   color-scheme: light;
 }
-html { background: var(--ground); }
+html { background: var(--ground); overflow-x: clip; }
 body { background-color: var(--ground); background-image: var(--tooth-fine), var(--hairs), var(--grain), var(--fiber-tex), var(--mottle); background-size: 240px 240px, 520px 520px, 190px 190px, 300px 300px, 1180px 1180px; color: var(--ink); font-family: var(--body); font-weight: 300; line-height: 1.9; margin: 0; padding-inline: 0; padding-block: 0; overflow-x: clip; }
 a { color: inherit; }
 a:focus-visible, button:focus-visible { outline: 1px dashed var(--ink-soft); outline-offset: 4px; }
@@ -245,6 +245,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 }
 
 @media (max-width: 900px) {
+  .hide-sm { display: none !important; }
   .side { width: min(86vw, 320px); transform: translateX(-104%); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
   .side.open { transform: none; }
   .topbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding: 8px 16px; background: rgba(242,218,208,.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
