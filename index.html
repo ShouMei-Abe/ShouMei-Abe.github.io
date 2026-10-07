@@ -7,7 +7,7 @@
 <title>Yi Zhuang</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400&family=Special+Elite&family=Nothing+You+Could+Do&family=LXGW+WenKai+TC:wght@300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Mea+Culpa&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+TC:wght@300;400&family=Special+Elite&family=Nothing+You+Could+Do&family=LXGW+WenKai+TC:wght@300&display=swap">
 <style>
 /* Layout: a torn strip of paper pinned down the left as the index; the pink ground is the page; stationery (letter paper, cotton, vellum, tags) slides over itself as you scroll; the branch is drawn in bleeding pen */
 :root {
@@ -24,7 +24,8 @@
   --margin-line: rgba(196,112,100,.32);
   --side-w: 232px;
   --gut-r: clamp(16px, 4vw, 56px);
-  --script: "Mrs Saint Delafield", "Snell Roundhand", "Apple Chancery", cursive;
+  --script: "Herr Von Muellerhoff", "Snell Roundhand", "Apple Chancery", cursive;
+  --script-white: "Mea Culpa", "Snell Roundhand", "Apple Chancery", cursive;
   --serif: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
   --body: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='190' height='190'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .27  0 0 0 0 .22  0 0 0 .13 -.02'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
@@ -79,7 +80,7 @@ a:focus-visible, button:focus-visible { outline: 1px dashed var(--ink-soft); out
 /* sidebar */
 .side { position: fixed; left: 0; top: 0; bottom: 0; width: calc(var(--side-w) + 22px); z-index: 40; pointer-events: none; }
 .side-paper { position: absolute; inset: 0; pointer-events: auto; padding: calc(40px + env(safe-area-inset-top, 0px)) 44px 32px 30px; display: flex; flex-direction: column; overflow-y: auto; }
-.side-name { font-family: var(--script); font-size: 56px; line-height: 1; text-decoration: none; color: var(--ink); display: block; margin-bottom: 2px; }
+.side-name { font-family: var(--script); font-size: 68px; line-height: 1; text-decoration: none; color: var(--ink); display: block; margin-bottom: 2px; }
 .side-zh { font-size: 13px; letter-spacing: .32em; color: var(--ink-soft); margin: 0 0 36px 4px; }
 .side nav { display: grid; gap: 2px; }
 .side nav > a { text-decoration: none; font-family: var(--serif); font-size: 21px; display: flex; align-items: baseline; gap: 10px; padding-block: 3px; transition: color .4s ease, transform .4s ease; }
@@ -104,12 +105,12 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .bleed-r { margin-right: calc(-1 * var(--gut-r)); }
 
 
-.label { font-family: var(--script); font-weight: 400; font-size: clamp(72px, 10vw, 128px); line-height: .9; margin: 0; color: var(--ink); }
+.label { font-family: var(--script); font-weight: 400; font-size: clamp(88px, 12vw, 156px); line-height: .9; margin: 0; color: var(--ink); }
 .label-note { font-family: var(--serif); font-style: italic; color: var(--ink-soft); margin: 4px 0 56px .3em; font-size: 17px; }
 
 /* home */
 .hero { position: relative; min-height: min(88vh, 820px); display: grid; align-content: center; padding-block: 72px 40px; }
-.name { font-family: var(--script); font-weight: 400; font-size: clamp(96px, 15vw, 220px); line-height: .9; color: var(--fiber); -webkit-text-stroke: .7px rgba(85,54,42,.4); margin: 0; position: relative; z-index: 2; clip-path: inset(-70% 100% -90% -18%); animation: write 3.4s cubic-bezier(.55,.1,.3,1) .4s forwards; }
+.name { font-family: var(--script-white); font-weight: 400; font-size: clamp(96px, 15vw, 220px); line-height: .9; color: var(--fiber); -webkit-text-stroke: .7px rgba(85,54,42,.4); margin: 0; position: relative; z-index: 2; clip-path: inset(-70% 100% -90% -18%); animation: write 3.4s cubic-bezier(.55,.1,.3,1) .4s forwards; }
 @keyframes write { to { clip-path: inset(-70% -10% -90% -18%); } }
 .sub { position: relative; z-index: 2; font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.3vw, 24px); color: var(--ink-soft); margin: 20px 0 0 .5em; opacity: 0; animation: rise 1.6s ease 2.8s forwards; }
 .statement { position: relative; z-index: 2; max-width: 30em; margin: 34px 0 0 .6em; font-size: 16px; opacity: 0; animation: rise 1.6s ease 3.3s forwards; }
@@ -124,9 +125,9 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .card:nth-child(2) { top: 13vh; z-index: 2; }
 .card:nth-child(3) { top: 17vh; z-index: 3; }
 .letter { max-width: 620px; padding: 46px 40px 46px 78px; --r: -1.2deg; }
-.letter .greet { font-family: var(--script); font-size: 52px; line-height: 64px; margin: 0; }
+.letter .greet { font-family: var(--script); font-size: 62px; line-height: 64px; margin: 0; }
 .letter p { margin: 0; font-size: 15.5px; }
-.letter .sign { font-family: var(--script); font-size: 40px; text-align: right; margin-top: 16px; line-height: 48px; }
+.letter .sign { font-family: var(--script); font-size: 50px; text-align: right; margin-top: 16px; line-height: 48px; }
 .selected { margin-left: clamp(0px, 12vw, 180px); padding: 40px clamp(24px, 4vw, 48px) 44px; --r: 1.4deg; }
 .selected h3, .now h3 { font-family: var(--serif); font-weight: 500; font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 18px; }
 .sel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 28px; }
@@ -211,7 +212,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 /* footer */
 .foot-wrap { position: relative; z-index: 2; margin-top: 140px; }
 .foot { padding: 76px clamp(24px, 5vw, 72px) calc(32px + env(safe-area-inset-bottom, 0px)); }
-.foot-sign { font-family: var(--script); font-size: clamp(64px, 10vw, 124px); line-height: .9; margin: 0 0 44px; color: var(--fiber); -webkit-text-stroke: .6px rgba(85,54,42,.38); }
+.foot-sign { font-family: var(--script-white); font-size: clamp(64px, 10vw, 124px); line-height: .9; margin: 0 0 44px; color: var(--fiber); -webkit-text-stroke: .6px rgba(85,54,42,.38); }
 .foot-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 32px; max-width: 900px; }
 .foot h4 { font-family: var(--serif); font-weight: 500; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; margin: 0 0 12px; }
 .foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-size: 14.5px; }
@@ -226,7 +227,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
   .side { width: min(86vw, 320px); transform: translateX(-104%); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
   .side.open { transform: none; }
   .topbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding: 8px 16px; background: rgba(242,218,208,.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-  .topbar a { font-family: var(--script); font-size: 38px; line-height: 1.1; text-decoration: none; }
+  .topbar a { font-family: var(--script); font-size: 46px; line-height: 1.1; text-decoration: none; }
   main { margin-left: 0; padding-inline: 20px var(--gut-r); }
   .w-feature, .w-pair, .about-grid { grid-template-columns: minmax(0, 1fr); }
   .t-gallery { grid-template-columns: minmax(0, 1fr); gap: 28px; }
