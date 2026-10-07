@@ -223,6 +223,25 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .foot-base .hint { font-family: var(--body); font-style: normal; font-size: 12.5px; letter-spacing: .08em; }
 
 
+/* collapsed index: everywhere except Home, the paper folds away to a thin strip; hover it, focus it, or press the icon to unfold it over the page */
+.menu-fab { display: none; }
+@media (min-width: 901px) {
+  .side { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+  .nav-collapsed .side { transform: translateX(calc(-100% + 30px)); transition-delay: .25s; }
+  .nav-collapsed .side:hover, .nav-collapsed .side:focus-within, .nav-collapsed .side.open { transform: none; transition-delay: 0s; }
+  .nav-collapsed .side-paper > :is(.side-name, .side-zh, nav, .side-foot) { opacity: 0; transition: opacity .3s ease .1s; }
+  .nav-collapsed .side:hover .side-paper > :is(.side-name, .side-zh, nav, .side-foot), .nav-collapsed .side:focus-within .side-paper > :is(.side-name, .side-zh, nav, .side-foot), .nav-collapsed .side.open .side-paper > :is(.side-name, .side-zh, nav, .side-foot) { opacity: 1; transition-delay: .15s; }
+  .nav-collapsed .side.closing .side-paper > :is(.side-name, .side-zh, nav, .side-foot) { opacity: 0; transition-delay: 0s; }
+  .nav-collapsed .side.closing, .nav-collapsed .side.closing:hover, .nav-collapsed .side.closing:focus-within { transform: translateX(calc(-100% + 30px)); transition-delay: 0s; }
+  .nav-collapsed main { margin-left: 30px; padding-inline: clamp(28px, 5vw, 80px); }
+  .nav-collapsed .view:not([data-view="home"]), .nav-collapsed .foot-wrap { max-width: 1080px; margin-inline: auto; }
+  .nav-collapsed .bleed-r { margin-right: 0; }
+  .nav-collapsed .menu-fab { display: grid; place-items: center; position: fixed; top: calc(18px + env(safe-area-inset-top, 0px)); right: 22px; z-index: 45; width: 42px; height: 42px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: rgba(247,229,221,.86); color: var(--ink); cursor: pointer; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); transition: background .4s ease, transform .4s ease; }
+  .nav-collapsed .menu-fab:hover { background: var(--shell); transform: rotate(-4deg); }
+  .menu-fab svg { width: 20px; height: 20px; }
+  .menu-fab path { stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; fill: none; }
+}
+
 @media (max-width: 900px) {
   .side { width: min(86vw, 320px); transform: translateX(-104%); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
   .side.open { transform: none; }
@@ -282,6 +301,8 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
   <a href="#home">Yi Zhuang</a>
   <button class="menu-btn" id="menuBtn" aria-controls="side" aria-expanded="false">index</button>
 </header>
+
+<button class="menu-fab" id="menuFab" type="button" aria-controls="side" aria-expanded="false" aria-label="開啟目錄"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6 C8 5 13 7 17 5.6"/><path d="M3 10.4 C8 9.6 12 11 17 10"/><path d="M3 14.6 C7 14 12 15.4 17 14.4"/></svg></button>
 
 <main id="main">
 
@@ -1458,7 +1479,7 @@ document.documentElement.classList.add('js');
   addEventListener('resize', () => { para(); });
 
   const views = {}; document.querySelectorAll('.view').forEach(v => views[v.dataset.view] = v);
-  const side = document.getElementById('side'), btn = document.getElementById('menuBtn');
+  const side = document.getElementById('side'), btn = document.getElementById('menuBtn'), fab = document.getElementById('menuFab'), sidePaper = side.firstElementChild;
   let current = null;
   function show() {
     let v = location.hash.slice(1) || 'home', target = null;
@@ -1467,7 +1488,11 @@ document.documentElement.classList.add('js');
     const changed = v !== current; current = v;
     Object.entries(views).forEach(([k, el]) => el.hidden = k !== v);
     document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === v));
-    side.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+    const folded = v !== 'home';
+    document.body.classList.toggle('nav-collapsed', folded);
+    side.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); fab.setAttribute('aria-expanded', 'false');
+    if (side.contains(document.activeElement)) document.activeElement.blur();
+    if (folded && sidePaper.matches(':hover')) side.classList.add('closing');
     requestAnimationFrame(() => {
       if (target) { const el = document.getElementById(target); if (el) { if (el.classList.contains('reveal')) el.classList.add('in'); el.querySelectorAll('.reveal').forEach(r => r.classList.add('in')); el.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' }); } }
       else if (changed) scrollTo(0, 0);
@@ -1477,6 +1502,11 @@ document.documentElement.classList.add('js');
   }
   addEventListener('hashchange', show);
   btn.addEventListener('click', () => { const o = side.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  fab.addEventListener('click', () => { side.classList.remove('closing'); const o = side.classList.toggle('open'); fab.setAttribute('aria-expanded', o); });
+  sidePaper.addEventListener('pointerleave', () => side.classList.remove('closing'));
+  const fold = () => { side.classList.remove('open'); fab.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-expanded', 'false'); };
+  document.addEventListener('click', e => { if (side.classList.contains('open') && !side.contains(e.target) && !fab.contains(e.target) && !btn.contains(e.target)) fold(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') fold(); });
 
   let lastT = performance.now();
   function loop(now) {
