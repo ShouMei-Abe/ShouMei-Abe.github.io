@@ -96,7 +96,9 @@ a:focus-visible, button:focus-visible { outline: 1px dashed var(--ink-soft); out
 .side-foot .mail { font-style: normal; user-select: all; word-break: break-all; }
 
 .topbar { display: none; }
-.menu-btn { font: inherit; font-family: var(--serif); font-style: italic; font-size: 18px; background: none; border: 0; color: var(--ink); padding: 6px 4px; cursor: pointer; }
+.menu-btn { display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: rgba(247,229,221,.86); color: var(--ink); cursor: pointer; }
+.menu-btn svg { width: 20px; height: 20px; }
+.menu-btn path { stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; fill: none; }
 
 /* main */
 main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28px, 5vw, 80px) var(--gut-r); padding-block: 0 0; min-height: 100vh; }
@@ -299,7 +301,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 
 <header class="topbar">
   <a href="#home">Yi Zhuang</a>
-  <button class="menu-btn" id="menuBtn" aria-controls="side" aria-expanded="false">index</button>
+  <button class="menu-btn" id="menuBtn" aria-controls="side" aria-expanded="false" aria-label="開啟目錄"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6 C8 5 13 7 17 5.6"/><path d="M3 10.4 C8 9.6 12 11 17 10"/><path d="M3 14.6 C7 14 12 15.4 17 14.4"/></svg></button>
 </header>
 
 <button class="menu-fab" id="menuFab" type="button" aria-controls="side" aria-expanded="false" aria-label="開啟目錄"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6 C8 5 13 7 17 5.6"/><path d="M3 10.4 C8 9.6 12 11 17 10"/><path d="M3 14.6 C7 14 12 15.4 17 14.4"/></svg></button>
