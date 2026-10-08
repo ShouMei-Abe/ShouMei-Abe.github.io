@@ -150,6 +150,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .sketch path { fill: none; stroke: var(--ink-soft); stroke-width: 1; stroke-linecap: round; opacity: .6; }
 .plate.video { aspect-ratio: 16 / 9; display: block; padding: 0; }
 .plate.video iframe { width: 100%; height: 100%; border: 0; display: block; }
+.w-cube .plate.video { aspect-ratio: 1 / 1; } /* 立方體sketch是正方形畫布，維持1:1比例 */
 .plate small { position: absolute; bottom: 10px; right: 14px; font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 13px; }
 
 /* works */
@@ -432,10 +433,10 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 
       <article class="work w-cube scrap m-cotton t-blush reveal" id="w-cube" data-amp="7" data-style="deckle" data-stack="1" data-lift=".45">
         <div class="tape scrap vellum" data-amp="3"></div>
-        <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M70 34 L130 34 L130 94 L70 94 Z"/><path d="M70 34 L90 20 L150 20 L130 34"/><path d="M130 94 L150 80 L150 20"/></svg><small>之後放可直接玩的互動畫面</small></div>
+        <div class="plate video scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05"><iframe src="https://editor.p5js.org/ShouMei-Abe/full/u50_84f0H" title="驚喜立方體 — 互動畫面" loading="lazy" allow="accelerometer; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
         <span class="tagline">Interactive · p5.js · 2026</span>
         <h3>驚喜立方體</h3>
-        <p class="meta">鍵盤互動作品</p>
+        <p class="meta">鍵盤互動作品 — 點進畫面後按鍵盤上的英文字母試試看</p>
       </article>
       <div class="w-pair">
         <article class="work w-draw scrap m-writing t-shell lined reveal para" id="w-drawing" data-speed=".06" data-amp="8" data-stack="1" data-lift=".32">
