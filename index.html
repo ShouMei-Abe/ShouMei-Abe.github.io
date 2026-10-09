@@ -195,6 +195,9 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .w-studio { margin-top: 60px; }
 .w-solo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .w-solo > :only-child { grid-column: 1; }
+.w-stack-head { margin: 0 0 28px 8%; }
+.w-stack-head h3 { margin: 4px 0 0; }
+.w-stack-head em { font-family: var(--serif); font-size: .8em; opacity: .75; margin-left: 6px; }
 .w-stack { position: relative; display: flex; flex-direction: column; padding-bottom: 20px; }
 .w-stack .w-oil2 { position: relative; padding: 18px 18px 24px; }
 .w-stack #w-woodcut { width: 46%; align-self: flex-end; margin-right: 6%; z-index: 3; --r: 1.6deg; }
@@ -302,8 +305,8 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         <li><a href="#w-cube">驚喜立方體<span class="yr">2026</span></a></li>
         <li><a href="#w-oil">油畫</a></li>
         <li><a href="#w-woodcut">藏書票</a></li>
-        <li><a href="#w-figure">人像</a></li>
-        <li><a href="#w-pink">粉紅（暫名）</a></li>
+        <li><a href="#w-figure">蜷坐</a></li>
+        <li><a href="#w-pink">She is</a></li>
       </ul>
       <a href="#writing" data-nav="writing">Writing <span>書寫</span></a>
       <a href="#about" data-nav="about">About <span>關於</span></a>
@@ -462,6 +465,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         </article>
       </div>
       <div class="w-stack w-studio">
+        <header class="w-stack-head"><span class="tagline">Series</span><h3>所屬 <em>Belonging</em></h3></header>
         <article class="work w-oil2 scrap m-laid t-rose reveal" id="w-woodcut" data-amp="9" data-lift=".4">
           <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1030/760"><img src="img/studio-woodcut.jpg" alt="藏書票（木口木刻版畫），紫紅色：方框內一道像嘴唇或地平線的形狀，下方是兩行手刻的古英文字" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <span class="tagline">Ex libris · Wood engraving</span>
@@ -471,13 +475,13 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         <article class="work w-oil2 scrap m-laid t-rose reveal" id="w-figure" data-amp="9" data-lift=".4">
           <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1860/2525"><img src="img/studio-figure.jpg" alt="人像：以褐色大筆刷塗出蜷坐的人，粉紅與淡紫的底色上有大量垂流的藍色與灰綠色顏料" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <span class="tagline">Painting</span>
-          <h3>人像</h3>
+          <h3>蜷坐</h3>
         </article>
         <article class="work w-oil2 scrap m-laid t-rose reveal" id="w-pink" data-amp="9" data-lift=".4">
-          <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:2000/1000"><img src="img/studio-pink-wall.jpg" alt="粉紅色的報紙拼貼大幅作品，中央有一塊藍色長方形與一道裂縫，掛在校內廁所入口的磁磚牆上，左邊是紅色火警鈴，右邊是掛著的紅色畫作" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-          <span class="tagline">Mixed media · newspaper</span>
-          <h3>粉紅（暫名）</h3>
-          <p class="meta">重製版本</p>
+          <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1990/1260"><img src="img/studio-pink-wall.jpg" alt="She is：粉紅色的報紙拼貼大幅作品，中央有一塊藍色長方形與一道裂縫，掛在校內廁所入口的磁磚牆上，左側可見一只紅色火警鈴" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span class="tagline">Mixed media</span>
+          <h3>She is</h3>
+          <p class="meta">不織布、報紙、膠、壓克力・重製版本</p>
         </article>
       </div>
     </div>
