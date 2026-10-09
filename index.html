@@ -191,6 +191,24 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .w-cube { margin: 0 0 90px 22%; padding: 28px 28px 34px; max-width: 520px; --r: 1.6deg; }
 .w-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: start; }
 .w-draw { padding: 24px 24px 30px 70px; --r: -2deg; }
+.w-oil2 { padding: 24px 24px 30px; --r: -1.2deg; }
+.w-studio { margin-top: 60px; }
+.w-solo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.w-solo > :only-child { grid-column: 1; }
+.w-stack .plate img { filter: sepia(.16) saturate(1.04) brightness(1.02); }
+.w-stack #w-woodcut .plate img { filter: brightness(1.12) contrast(1.1) saturate(1.15); }
+.w-stack #w-pink .plate img { filter: none; }
+.w-stack #w-figure .plate img { filter: sepia(.16) saturate(.95) contrast(1.02) brightness(1.02); }
+.w-stack-head { margin: 0 0 28px 8%; }
+.w-stack-head h3 { margin: 4px 0 0; }
+.w-stack-head em { font-family: var(--serif); font-size: .8em; opacity: .75; margin-left: 6px; }
+.w-stack { position: relative; display: flex; flex-direction: column; padding-bottom: 20px; }
+.w-stack .w-oil2 { position: relative; padding: 18px 18px 24px; }
+.w-stack #w-woodcut { width: 58%; align-self: flex-end; margin-right: 6%; z-index: 3; --r: 1.6deg; }
+.w-stack #w-figure { width: 30%; margin: 70px 0 0 3%; z-index: 0; --r: -1.8deg; }
+.w-stack .w-row { display: flex; align-items: center; margin-top: -90px; position: relative; z-index: 1; }
+.w-stack #w-pink { width: 62%; margin: 0 0 0 2%; z-index: 1; --r: 1.2deg; }
+.w-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; align-items: center; }
 .w-oil { margin-top: 110px; padding: 24px 24px 30px; --r: 2.4deg; }
 .tape { position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; transform: translateX(-50%) rotate(-3deg); z-index: 3; }
 
@@ -252,8 +270,11 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
   .topbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding: 8px 16px; background: rgba(242,218,208,.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   .topbar a { font-family: var(--script); font-size: 46px; line-height: 1.1; text-decoration: none; }
   main { margin-left: 0; padding-inline: 20px var(--gut-r); }
-  .w-feature, .w-pair, .about-grid { grid-template-columns: minmax(0, 1fr); }
-  .t-gallery { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .w-feature, .w-pair, .w-trio, .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .w-stack #w-woodcut, .w-stack #w-figure, .w-stack #w-pink { width: 82%; }
+  .w-stack .w-row { flex-direction: column; align-items: stretch; margin-top: -60px; }
+  .w-stack #w-pink, .w-stack #w-figure { margin: 0 0 0 10%; }
+  .w-stack #w-figure { margin-top: -50px; }
   .t-gallery .t-trio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 0; }
   .t-gallery .t-trio .shot { width: auto; margin: 0 !important; }
   .t-gallery .t-trio figcaption { opacity: 1; }
@@ -288,8 +309,10 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
       <ul class="side-works">
         <li><a href="#w-wedding">To/gether - 在與一起<span class="yr">2025</span></a></li>
         <li><a href="#w-cube">驚喜立方體<span class="yr">2026</span></a></li>
-        <li><a href="#w-drawing">素描</a></li>
         <li><a href="#w-oil">油畫</a></li>
+        <li><a href="#w-woodcut">Ex Libris</a></li>
+        <li><a href="#w-pink">She is</a></li>
+        <li><a href="#w-figure">Figure</a></li>
       </ul>
       <a href="#writing" data-nav="writing">Writing <span>書寫</span></a>
       <a href="#about" data-nav="about">About <span>關於</span></a>
@@ -438,13 +461,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         <h3>驚喜立方體</h3>
         <p class="meta">鍵盤互動作品 — 點進畫面後按鍵盤上的英文字母試試看</p>
       </article>
-      <div class="w-pair">
-        <article class="work w-draw scrap m-writing t-shell lined reveal para" id="w-drawing" data-speed=".06" data-amp="8" data-stack="1" data-lift=".32">
-          <div class="plate scrap m-card t-cotton" data-amp="4" data-style="cut" data-lift=".05"><svg class="sketch" viewBox="0 0 200 120" aria-hidden="true"><path d="M40 96 C50 60 70 40 100 36 C130 40 150 60 160 96"/><path d="M100 36 C98 26 102 18 110 14"/></svg><small>素描</small></div>
-          <span class="tagline">Drawing</span>
-          <h3>素描</h3>
-          <p class="meta">系列，年份待填</p>
-        </article>
+      <div class="w-pair w-solo">
         <article class="work w-oil scrap m-laid t-rose reveal para" id="w-oil" data-speed="-.06" data-amp="11" data-lift=".62">
           <div class="tape scrap vellum" data-amp="3" style="left:24%;transform:translateX(-50%) rotate(7deg)"></div>
           <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1111/1474"><img src="img/oil-soil-2021-22.jpg" alt="油畫：一塊懸在灰白空間裡的泥土，紅色的根像血管與珊瑚般攀在褐色的土、苔蘚與枯草上" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
@@ -452,6 +469,28 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
           <h3>油畫</h3>
           <p class="meta">2021–2022</p>
         </article>
+      </div>
+      <div class="w-stack w-studio">
+        <header class="w-stack-head"><span class="tagline">Series</span><h3>所屬 <em>Belonging</em></h3></header>
+        <article class="work w-oil2 scrap m-card t-blush reveal" id="w-woodcut" data-amp="9" data-lift=".4">
+          <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1030/760"><img src="img/studio-woodcut.jpg" alt="藏書票（木口木刻版畫），紫紅色：方框內一道像嘴唇或地平線的形狀，下方是兩行手刻的古英文字" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span class="tagline">Wood engraving</span>
+          <h3>Ex Libris</h3>
+          <p class="meta">2026・重製版本</p>
+        </article>
+        <div class="w-row">
+        <article class="work w-oil2 scrap m-writing t-blush reveal" id="w-pink" data-amp="9" data-lift=".4">
+          <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1990/1260"><img src="img/studio-pink-wall.jpg" alt="She is：粉紅色的報紙拼貼大幅作品，中央有一塊藍色長方形與一道裂縫，掛在校內廁所入口的磁磚牆上，左側可見一只紅色火警鈴" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span class="tagline">Mixed media</span>
+          <h3>She is</h3>
+          <p class="meta">不織布、報紙、膠、壓克力・重製版本</p>
+        </article>
+        <article class="work w-oil2 scrap m-cotton t-blush reveal" id="w-figure" data-amp="9" data-lift=".4">
+          <div class="plate scrap m-card t-shell" data-amp="4" data-style="cut" data-lift=".05" style="aspect-ratio:1860/2525"><img src="img/studio-figure.jpg" alt="Figure：以褐色大筆刷塗出蜷坐的人，粉紅與淡紫的底色上有大量垂流的藍色與灰綠色顏料" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span class="tagline">Acrylic on canvas</span>
+          <h3>Figure</h3>
+        </article>
+        </div>
       </div>
     </div>
   </div>
