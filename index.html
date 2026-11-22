@@ -219,6 +219,9 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .entry time { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 16px; font-variant-numeric: tabular-nums; }
 .entry h3 { font-weight: 400; font-size: 18px; margin: 0; letter-spacing: .04em; }
 .entry p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+.entry h3 a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s ease; }
+.entry h3 a:hover { background-size: 0 1px; }
+.entry h3 a:focus-visible { outline: 1px dashed currentColor; outline-offset: 4px; }
 .example { font-family: var(--body); font-size: 11.5px; letter-spacing: .1em; color: var(--ink-soft); border: 1px solid var(--line); padding: 0 7px; border-radius: 2px; margin-left: 10px; vertical-align: 2px; line-height: 20px; }
 
 /* about */
@@ -327,7 +330,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         <li><a href="#w-cave">The Cave Dweller</a></li>
         <li><a href="#w-moon">月長河</a></li>
       </ul>
-      <!-- <a href="#writing" data-nav="writing">Writing <span>書寫</span></a> -->
+      <a href="#writing" data-nav="writing">Writing <span>書寫</span></a>
       <a href="#about" data-nav="about">About <span>關於</span></a>
     </nav>
     <div class="side-foot">
@@ -596,21 +599,16 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
     </div>
   </div>
 
-  <!-- Writing 區暫時隱藏（尚無正式文章）
   <div class="view" data-view="writing" hidden>
     <div style="padding-top:88px;position:relative">
       <h2 class="label reveal">Writing</h2>
-      <p class="label-note reveal">essays, notes, and fiction</p>
+      <p class="label-note reveal">essays, notes, and interviews</p>
     </div>
     <div class="paper-long scrap m-writing t-shell lined bleed-r reveal" data-amp="10" data-edges="tlb" data-lift=".14">
       <canvas class="botanic" aria-hidden="true" data-seed="88" data-type="berry" data-pal="rose" data-soft=".55" data-len=".55" data-fade="" data-origin="1.01,1.02" data-dir="-2.4" style="left:0;top:0;width:100%;height:100%"></canvas>
-      <div class="entry"><time>2026.09</time><div><h3>標題放這裡<span class="example">範例</span></h3><p>一兩行摘要，點進去是完整的文章。</p></div></div>
-      <div class="entry"><time>2026.06</time><div><h3>第二篇文章<span class="example">範例</span></h3><p>書寫區會隨著你寫的東西慢慢長出來。</p></div></div>
-      <div class="entry"><time>2026.03</time><div><h3>第三篇文章<span class="example">範例</span></h3><p>散文、小說、創作筆記都可以放在這裡。</p></div></div>
-      <div class="entry"><time>2025.12</time><div><h3>第四篇文章<span class="example">範例</span></h3><p>信紙的線會一直往下延伸。</p></div></div>
+      <div class="entry"><time>2026.11</time><div><h3><a href="https://artouch.com/art-after-ai/content-271848.html" target="_blank" rel="noopener noreferrer">AI時代，藝術教育如何提倡獨立思考？一位藝術大學學生對AI的觀察與經驗</a></h3><p>典藏 ARTouch【專題】AI之後，怎麼學藝術？（春之 × 典藏・思想庫）。受邀以藝術大學學生的身分談對 AI 的觀察與經驗。全文在典藏網站，點標題前往閱讀。</p></div></div>
     </div>
   </div>
-  -->
 
   <div class="view" data-view="about" hidden>
     <div style="padding-top:88px;position:relative">
@@ -639,7 +637,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
       <div class="foot-cols">
         <div><h4>Contact</h4><p class="mail">evaxie91@gmail.com</p><ul><li>委託、合作、展覽邀約</li></ul></div>
         <div><h4>Elsewhere</h4><ul><li><a href="https://www.instagram.com/2025__to.gether__art" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="https://github.com/ShouMei-Abe" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul></div>
-        <div><h4>Index</h4><ul><li><a href="#home">Home</a></li><li><a href="#works">Works</a></li><!-- <li><a href="#writing">Writing</a></li> --><li><a href="#about">About</a></li></ul></div>
+        <div><h4>Index</h4><ul><li><a href="#home">Home</a></li><li><a href="#works">Works</a></li><li><a href="#writing">Writing</a></li><li><a href="#about">About</a></li></ul></div>
         <div><h4>Colophon</h4><ul><li>手寫字：以莊</li><li>內文：Noto Serif TC</li><li>網站：GitHub Pages</li></ul></div>
       </div>
       <div class="foot-base"><span>© 2026 Yi Zhuang</span><span class="hint">游標會留下墨痕，按住會更濕一點</span></div>
