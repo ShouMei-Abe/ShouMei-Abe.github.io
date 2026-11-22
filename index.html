@@ -222,19 +222,24 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .entry h3 a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s ease; }
 .entry h3 a:hover { background-size: 0 1px; }
 .entry h3 a:focus-visible { outline: 1px dashed currentColor; outline-offset: 4px; }
-.tl .entry time { font-size: 24px; line-height: 1.2; }
-.tl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.tl-list li { display: grid; grid-template-columns: 76px minmax(0, 390px) minmax(0, 1fr); gap: 0 16px; align-items: baseline; font-size: 14.5px; color: var(--ink-soft); }
-.tl-list .k { font-family: var(--serif); font-style: italic; font-size: 13px; letter-spacing: .06em; color: var(--ink-soft); }
-.tl-list a { color: var(--ink); font-size: 16.5px; letter-spacing: .03em; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s ease; }
-.tl-list a:hover { background-size: 0 1px; }
-.tl-list a:focus-visible { outline: 1px dashed currentColor; outline-offset: 4px; }
-.tl-list a { justify-self: start; }
-.tl-list em { font-style: normal; font-size: 13.5px; }
+/* chronology */
+.chron { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 34px 30px; align-items: start; max-width: 1020px; padding-bottom: 20px; }
+.yc { padding: 24px 26px 30px; --r: -.8deg; }
+.yc:nth-child(even) { --r: .9deg; }
+.yc h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: .06em; text-align: center; margin: 0 0 14px; }
+.yc .zh { margin: 0 0 10px; font-size: 15px; line-height: 1.85; }
+.yc .en { margin: 0; font-family: var(--serif); font-size: 12.5px; line-height: 1.7; color: var(--ink-soft); }
+.yc a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 1px; transition: background-size .5s ease; }
+.yc a:hover { background-size: 0 1px; }
+.yc a:focus-visible { outline: 1px dashed currentColor; outline-offset: 3px; }
+@media (min-width: 901px) {
+  .yc:nth-child(3n+2) { margin-top: 46px; }
+  .yc:nth-child(3n) { margin-top: 18px; }
+}
 .cv-more { margin: 0; font-size: 14px; }
 .cv-more a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s ease; }
 .cv-more a:hover { background-size: 0 1px; }
-.example { font-family: var(--body); font-size: 11.5px; letter-spacing: .1em; color: var(--ink-soft); border: 1px solid var(--line); padding: 0 7px; border-radius: 2px; margin-left: 10px; vertical-align: 2px; line-height: 20px; }
+.example, .kind { font-family: var(--body); font-size: 11.5px; letter-spacing: .1em; color: var(--ink-soft); border: 1px solid var(--line); padding: 0 7px; border-radius: 2px; margin-left: 10px; vertical-align: 2px; line-height: 20px; }
 
 /* about */
 .about-lead { font-family: var(--serif); font-size: clamp(24px, 3vw, 34px); line-height: 1.5; max-width: 22em; margin: 0 0 56px; text-wrap: balance; }
@@ -301,8 +306,6 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
   .letter { padding-left: 64px; padding-right: 24px; }
   .paper-long { padding-left: 84px; }
   .entry { grid-template-columns: minmax(0, 1fr); }
-  .tl-list li { grid-template-columns: 64px minmax(0, 1fr); }
-  .tl-list em { grid-column: 2; margin-top: 2px; }
   .vine { opacity: .4; right: -30px; }
   .quote { margin-top: 0; }
 }
@@ -345,7 +348,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
         <li><a href="#w-moon">月長河</a></li>
       </ul>
       <a href="#timeline" data-nav="timeline">Timeline <span>年表</span></a>
-      <a href="#writing" data-nav="writing">Writing <span>書寫</span></a>
+      <a href="#articles" data-nav="articles">Articles <span>文章</span></a>
       <a href="#about" data-nav="about">About <span>關於</span></a>
     </nav>
     <div class="side-foot">
@@ -614,30 +617,31 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
     </div>
   </div>
 
-  <div class="view" data-view="writing" hidden>
+  <div class="view" data-view="articles" hidden>
     <div style="padding-top:88px;position:relative">
-      <h2 class="label reveal">Writing</h2>
-      <p class="label-note reveal">essays, notes, and interviews</p>
+      <h2 class="label reveal">Articles</h2>
+      <p class="label-note reveal">interviews, essays, and notes</p>
     </div>
     <div class="paper-long scrap m-writing t-shell lined bleed-r reveal" data-amp="10" data-edges="tlb" data-lift=".14">
       <canvas class="botanic" aria-hidden="true" data-seed="88" data-type="berry" data-pal="rose" data-soft=".55" data-len=".55" data-fade="" data-origin="1.01,1.02" data-dir="-2.4" style="left:0;top:0;width:100%;height:100%"></canvas>
-      <div class="entry"><time>2026.11</time><div><h3><a href="https://artouch.com/art-after-ai/content-271848.html" target="_blank" rel="noopener noreferrer">AI時代，藝術教育如何提倡獨立思考？一位藝術大學學生對AI的觀察與經驗</a></h3><p>典藏 ARTouch【專題】AI之後，怎麼學藝術？（春之 × 典藏・思想庫）。受邀以藝術大學學生的身分談對 AI 的觀察與經驗。全文在典藏網站，點標題前往閱讀。</p></div></div>
+      <div class="entry"><time>2026.11</time><div><h3><a href="https://artouch.com/art-after-ai/content-271848.html" target="_blank" rel="noopener noreferrer">AI時代，藝術教育如何提倡獨立思考？一位藝術大學學生對AI的觀察與經驗</a><span class="kind">Interview 訪談</span></h3><p>典藏 ARTouch【專題】AI之後，怎麼學藝術？（春之 × 典藏・思想庫）。受邀以藝術大學學生的身分談對 AI 的觀察與經驗。全文在典藏網站，點標題前往閱讀。</p></div></div>
     </div>
   </div>
 
   <div class="view" data-view="timeline" hidden>
     <div style="padding-top:88px;position:relative">
       <h2 class="label reveal">Timeline</h2>
-      <p class="label-note reveal">works, study, and writing, year by year</p>
+      <p class="label-note reveal">a chronology</p>
     </div>
-    <div class="paper-long tl scrap m-writing t-shell lined bleed-r reveal" data-amp="10" data-edges="tlb" data-lift=".14">
-      <canvas class="botanic" aria-hidden="true" data-seed="61" data-type="berry" data-pal="rose" data-soft=".55" data-len=".55" data-fade="" data-origin="1.01,1.02" data-dir="-2.4" style="left:0;top:0;width:100%;height:100%"></canvas>
-      <div class="entry"><time>2021</time><ul class="tl-list"><li><span class="k">Study</span><a href="#about">國立臺灣藝術大學 美術學系</a><em>入學</em></li><li><span class="k">Work</span><a href="#w-moon">月長河</a><em>攝影、文本・大一</em></li><li><span class="k">Work</span><a href="#w-oil">Line of Sight 視線</a><em>油畫・50F</em></li></ul></div>
-      <div class="entry"><time>2022</time><ul class="tl-list"><li><span class="k">Work</span><a href="#w-landscape">她的風景</a><em>油畫・15F，三張</em></li><li><span class="k">Work</span><a href="#w-wings">Heaven Above, Hell Below 上天堂 下地獄</a><em>蛋彩</em></li></ul></div>
-      <div class="entry"><time>2023</time><ul class="tl-list"><li><span class="k">Work</span><a href="#w-frame">Frame Selection 框選</a><em>複合媒材・90 × 90 cm</em></li><li><span class="k">Work</span><a href="#w-seeyou">See You 眼睛（我看你看我）</a><em>油畫・100F</em></li><li><span class="k">Work</span><a href="#w-dream">夢裡</a><em>油畫・約 F25</em></li><li><span class="k">Work</span><a href="#w-timeflow">Timeflow 時間之流</a><em>裝置・宣紙、不織布、墨汁</em></li><li><span class="k">Work</span><a href="#w-cave">The Cave Dweller 穴居之人</a><em>裝置・描圖紙、人體線稿、燈光</em></li></ul></div>
-      <div class="entry"><time>2024</time><ul class="tl-list"><li><span class="k">Work</span><a href="#w-dict">Dictionary 字典</a><em>印刷成冊・147 頁</em></li><li><span class="k">Work</span><a href="#w-sketch">sketch</a><em>拼貼、複合媒材・三聯幅</em></li><li><span class="k">Work</span><a href="#w-pink">She is</a><em>不織布、報紙、膠、壓克力・重製版本</em></li><li><span class="k">Work</span><a href="#w-crowd">One Among Many 眾人之人</a><em>裝置・各式紙類、不織布</em></li></ul></div>
-      <div class="entry"><time>2025</time><ul class="tl-list"><li><span class="k">Work</span><a href="#w-wedding">To/gether - 在與一起</a><em>行為・32 分鐘</em></li></ul></div>
-      <div class="entry"><time>2026</time><ul class="tl-list"><li><span class="k">Work</span><a href="#w-cube">Cubism</a><em>互動・p5.js</em></li><li><span class="k">Work</span><a href="#w-net">Net 網路</a><em>版畫（單版多色印刷）</em></li><li><span class="k">Work</span><a href="#w-sheher">She &amp; Her 她</a><em>粉彩</em></li><li><span class="k">Work</span><a href="#w-woodcut">Ex Libris</a><em>木口木刻・重製版本</em></li><li><span class="k">Work</span><a href="#w-figure">Figure</a><em>壓克力、畫布・20P</em></li><li><span class="k">Writing</span><a href="#writing">典藏 ARTouch 專題訪談</a><em>2026.11・AI之後，怎麼學藝術？</em></li></ul></div>
+    <div class="chron">
+      <div class="yc scrap m-card t-ivory reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2002</h3><p class="zh">11 月，出生。</p><p class="en">November: Born.</p></div>
+      <div class="yc scrap m-cotton t-blush reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2016–2017</h3><p class="zh">國二作〈街景〉；國三作〈望盡彼之笙〉，獲雅蒂斯盃佳作。</p><p class="en">Junior high school. Paints 〈街景〉 in the second year and 〈望盡彼之笙〉 in the third, the latter receiving an Honorable Mention at the Yadisi Cup.</p></div>
+      <div class="yc scrap m-card t-shell reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2018</h3><p class="zh">高一，作〈遂抑之隅〉，以升學壓力為題的人像油畫。</p><p class="en">First year of senior high school. Paints 〈遂抑之隅〉, an oil portrait about the pressure of entrance exams.</p></div>
+      <div class="yc scrap m-card t-ivory reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2019</h3><p class="zh">高二，作〈你怎麼還不回來〉，參加雅蒂斯盃；後收錄於第四屆康堤盃。</p><p class="en">Second year of senior high school. Paints 〈你怎麼還不回來〉, entered in the Yadisi Cup and later included in the 4th Kangdi Cup.</p></div>
+      <div class="yc scrap m-cotton t-blush reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2020</h3><p class="zh">高三，作〈乘繁而起〉，獲 109 年全國美展西畫類佳作。</p><p class="en">Third year of senior high school. Paints 〈乘繁而起〉, awarded an Honorable Mention in Western Painting at the 2020 National Art Exhibition.</p></div>
+      <div class="yc scrap m-card t-shell reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2021</h3><p class="zh">考上國立臺灣藝術大學美術學系。</p><p class="en">Enters the Department of Fine Arts, National Taiwan University of Arts.</p></div>
+      <div class="yc scrap m-card t-ivory reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2025</h3><p class="zh">完成〈<a href="#w-wedding">To/gether - 在與一起</a>〉，一件以婚禮儀式為形式的行為作品。</p><p class="en">Completes 〈To/gether〉, a performance in the form of a wedding ceremony.</p></div>
+      <div class="yc scrap m-cotton t-blush reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2026</h3><p class="zh">11 月，<a href="#articles">典藏 ARTouch 專題</a>刊出訪談。</p><p class="en">November: An interview is published in a special feature of ARTouch.</p></div>
     </div>
   </div>
 
@@ -669,7 +673,7 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
       <div class="foot-cols">
         <div><h4>Contact</h4><p class="mail">evaxie91@gmail.com</p><ul><li>委託、合作、展覽邀約</li></ul></div>
         <div><h4>Elsewhere</h4><ul><li><a href="https://www.instagram.com/2025__to.gether__art" target="_blank" rel="noopener noreferrer">Instagram</a></li><li><a href="https://github.com/ShouMei-Abe" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul></div>
-        <div><h4>Index</h4><ul><li><a href="#home">Home</a></li><li><a href="#works">Works</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#writing">Writing</a></li><li><a href="#about">About</a></li></ul></div>
+        <div><h4>Index</h4><ul><li><a href="#home">Home</a></li><li><a href="#works">Works</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#articles">Articles</a></li><li><a href="#about">About</a></li></ul></div>
         <div><h4>Colophon</h4><ul><li>手寫字：以莊</li><li>內文：Noto Serif TC</li><li>網站：GitHub Pages</li></ul></div>
       </div>
       <div class="foot-base"><span>© 2026 Yi Zhuang</span><span class="hint">游標會留下墨痕，按住會更濕一點</span></div>
