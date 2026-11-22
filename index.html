@@ -295,6 +295,8 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
   .hide-sm { display: none !important; }
   .side { width: min(86vw, 320px); transform: translateX(-104%); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
   .side.open { transform: none; }
+  .side-works { display: none; }
+  .side nav { gap: 10px; }
   .topbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; padding: 8px 16px; background: rgba(242,218,208,.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   .topbar a { font-family: var(--script); font-size: 46px; line-height: 1.1; text-decoration: none; }
   main { margin-left: 0; padding-inline: 20px var(--gut-r); }
