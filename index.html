@@ -222,19 +222,22 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
 .entry h3 a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s ease; }
 .entry h3 a:hover { background-size: 0 1px; }
 .entry h3 a:focus-visible { outline: 1px dashed currentColor; outline-offset: 4px; }
-/* chronology */
-.chron { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 34px 30px; align-items: start; max-width: 1020px; padding-bottom: 20px; }
-.yc { padding: 24px 26px 30px; --r: -.8deg; }
-.yc:nth-child(even) { --r: .9deg; }
-.yc h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; letter-spacing: .06em; text-align: center; margin: 0 0 14px; }
-.yc .zh { margin: 0 0 10px; font-size: 15px; line-height: 1.85; }
-.yc .en { margin: 0; font-family: var(--serif); font-size: 12.5px; line-height: 1.7; color: var(--ink-soft); }
-.yc a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 1px; transition: background-size .5s ease; }
-.yc a:hover { background-size: 0 1px; }
-.yc a:focus-visible { outline: 1px dashed currentColor; outline-offset: 3px; }
-@media (min-width: 901px) {
-  .yc:nth-child(3n+2) { margin-top: 46px; }
-  .yc:nth-child(3n) { margin-top: 18px; }
+/* chronology: years hang in the notebook margin, text sits on the ruled lines */
+.paper-long.tl { padding-left: 140px; padding-bottom: 96px; }
+.paper-long.lined.tl > .face { background-image: linear-gradient(90deg, transparent 108px, var(--margin-line) 108px 109px, transparent 109px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); background-position: 0 0, 0 28px; }
+.tl .ent { position: relative; max-width: 640px; margin-top: calc((1 + var(--gap, 0)) * 32px); }
+.tl .ent:first-child { margin-top: 0; }
+.tl .ent time { position: absolute; left: -118px; width: 80px; text-align: right; font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 32px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.tl .ent p { margin: 0; line-height: 32px; }
+.tl .ent .zh { font-size: 15px; }
+.tl .ent .en { font-family: var(--serif); font-size: 13px; color: var(--ink-soft); }
+.tl .ent a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 1px; transition: background-size .5s ease; }
+.tl .ent a:hover { background-size: 0 1px; }
+.tl .ent a:focus-visible { outline: 1px dashed currentColor; outline-offset: 3px; }
+@media (max-width: 900px) {
+  .paper-long.tl { padding-left: 84px; }
+  .paper-long.lined.tl > .face { background-image: linear-gradient(90deg, transparent 72px, var(--margin-line) 72px 73px, transparent 73px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); background-position: 0 0, 0 28px; }
+  .tl .ent time { left: -72px; width: 58px; font-size: 14px; }
 }
 .cv-more { margin: 0; font-size: 14px; }
 .cv-more a { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .5s ease; }
@@ -633,15 +636,16 @@ main { position: relative; margin-left: var(--side-w); padding-inline: clamp(28p
       <h2 class="label reveal">Timeline</h2>
       <p class="label-note reveal">a chronology</p>
     </div>
-    <div class="chron">
-      <div class="yc scrap m-card t-ivory reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2002</h3><p class="zh">11 月，出生。</p><p class="en">November: Born.</p></div>
-      <div class="yc scrap m-cotton t-blush reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2016–2017</h3><p class="zh">國二作〈街景〉；國三作〈望盡彼之笙〉，獲雅蒂斯盃佳作。</p><p class="en">Junior high school. Paints 〈街景〉 in the second year and 〈望盡彼之笙〉 in the third, the latter receiving an Honorable Mention at the Yadisi Cup.</p></div>
-      <div class="yc scrap m-card t-shell reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2018</h3><p class="zh">高一，作〈遂抑之隅〉，以升學壓力為題的人像油畫。</p><p class="en">First year of senior high school. Paints 〈遂抑之隅〉, an oil portrait about the pressure of entrance exams.</p></div>
-      <div class="yc scrap m-card t-ivory reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2019</h3><p class="zh">高二，作〈你怎麼還不回來〉，參加雅蒂斯盃；後收錄於第四屆康堤盃。</p><p class="en">Second year of senior high school. Paints 〈你怎麼還不回來〉, entered in the Yadisi Cup and later included in the 4th Kangdi Cup.</p></div>
-      <div class="yc scrap m-cotton t-blush reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2020</h3><p class="zh">高三，作〈乘繁而起〉，獲 109 年全國美展西畫類佳作。</p><p class="en">Third year of senior high school. Paints 〈乘繁而起〉, awarded an Honorable Mention in Western Painting at the 2020 National Art Exhibition.</p></div>
-      <div class="yc scrap m-card t-shell reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2021</h3><p class="zh">考上國立臺灣藝術大學美術學系。</p><p class="en">Enters the Department of Fine Arts, National Taiwan University of Arts.</p></div>
-      <div class="yc scrap m-card t-ivory reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2025</h3><p class="zh">完成〈<a href="#w-wedding">To/gether - 在與一起</a>〉，一件以婚禮儀式為形式的行為作品。</p><p class="en">Completes 〈To/gether〉, a performance in the form of a wedding ceremony.</p></div>
-      <div class="yc scrap m-cotton t-blush reveal" data-amp="4" data-style="cut" data-lift=".12"><h3>2026</h3><p class="zh">11 月，<a href="#articles">典藏 ARTouch 專題</a>刊出訪談。</p><p class="en">November: An interview is published in a special feature of ARTouch.</p></div>
+    <div class="paper-long tl scrap m-writing t-shell lined bleed-r reveal" data-amp="10" data-edges="tlb" data-lift=".14">
+      <canvas class="botanic" aria-hidden="true" data-seed="61" data-type="berry" data-pal="rose" data-soft=".55" data-len=".55" data-fade="" data-origin="1.01,1.02" data-dir="-2.4" style="left:0;top:0;width:100%;height:100%"></canvas>
+      <div class="ent"><time>2002</time><p class="zh">11 月，出生。</p><p class="en">November: Born.</p></div>
+      <div class="ent" style="--gap:3"><time>2016–17</time><p class="zh">國二作〈街景〉；國三作〈望盡彼之笙〉，獲雅蒂斯盃佳作。</p><p class="en">Junior high school. Paints 〈街景〉 in the second year and 〈望盡彼之笙〉 in the third, the latter receiving an Honorable Mention at the Yadisi Cup.</p></div>
+      <div class="ent"><time>2018</time><p class="zh">高一，作〈遂抑之隅〉，以升學壓力為題的人像油畫。</p><p class="en">First year of senior high school. Paints 〈遂抑之隅〉, an oil portrait about the pressure of entrance exams.</p></div>
+      <div class="ent"><time>2019</time><p class="zh">高二，作〈你怎麼還不回來〉，參加雅蒂斯盃；後收錄於第四屆康堤盃。</p><p class="en">Second year of senior high school. Paints 〈你怎麼還不回來〉, entered in the Yadisi Cup and later included in the 4th Kangdi Cup.</p></div>
+      <div class="ent"><time>2020</time><p class="zh">高三，作〈乘繁而起〉，獲 109 年全國美展西畫類佳作。</p><p class="en">Third year of senior high school. Paints 〈乘繁而起〉, awarded an Honorable Mention in Western Painting at the 2020 National Art Exhibition.</p></div>
+      <div class="ent"><time>2021</time><p class="zh">考上國立臺灣藝術大學美術學系。</p><p class="en">Enters the Department of Fine Arts, National Taiwan University of Arts.</p></div>
+      <div class="ent" style="--gap:3"><time>2025</time><p class="zh">完成〈<a href="#w-wedding">To/gether - 在與一起</a>〉，一件以婚禮儀式為形式的行為作品。</p><p class="en">Completes 〈To/gether〉, a performance in the form of a wedding ceremony.</p></div>
+      <div class="ent"><time>2026</time><p class="zh">11 月，<a href="#articles">典藏 ARTouch 專題</a>刊出訪談。</p><p class="en">November: An interview is published in a special feature of ARTouch.</p></div>
     </div>
   </div>
 
